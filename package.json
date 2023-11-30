@@ -1,0 +1,23 @@
+{
+  "name": "hyacinth",
+  "version": "2.0.0-indev",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SierraQin/Hyacinth.git"
+  },
+  "author": "SierraQin",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/SierraQin/Hyacinth/issues"
+  },
+  "homepage": "https://github.com/SierraQin/Hyacinth#readme",
+  "dependencies": {
+    "js-base64": "^3.7.5",
+    "weui-miniprogram": "^1.2.10"
+  }
+}
