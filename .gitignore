@@ -1,0 +1,19 @@
+# For WX Miniprogram
+# v1.3 29-Nov-23
+
+*ignore
+*ignore/
+
+*.bat
+*.sh
+*.py
+
+project*json
+package-lock.json
+node_modules/
+dist/
+build/
+
+miniprogram_npm/
+
+!.gitignore
