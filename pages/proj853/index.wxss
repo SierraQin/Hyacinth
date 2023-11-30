@@ -1,2 +1,19 @@
 /** pages/proj853/index.wxss **/
 
+.block {
+  display: block;
+  margin-bottom: 48rpx;
+}
+
+.svgMain {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+}
+
+.intro {
+  margin: 10px 0;
+}

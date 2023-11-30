@@ -18,6 +18,6 @@
   "homepage": "https://github.com/SierraQin/Hyacinth#readme",
   "dependencies": {
     "js-base64": "^3.7.5",
-    "weui-miniprogram": "^1.2.10"
+    "tdesign-miniprogram": "^1.2.4"
   }
 }

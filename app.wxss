@@ -1,3 +1,7 @@
 /* app.wxss */
 
-/* @import "./miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss"; */
+.custom-title {
+  margin-left: 16rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+}

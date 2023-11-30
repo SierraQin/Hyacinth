@@ -13,12 +13,10 @@
   "renderer": "webview",
   "rendererOptions": {
     "skyline": {
-      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "defaultDisplayBlock": false,
       "sdkVersionBegin": "3.0.0"
     }
   },
-  "sitemapLocation": "sitemap.json",
-  "usingComponents": {
-    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
-  }
+  "sitemapLocation": "sitemap.json"
 }

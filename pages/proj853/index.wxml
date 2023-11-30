@@ -1,3 +1,9 @@
 <!-- pages/proj853/index.wxml -->
 
-pages/index/index
+<view>
+  <double-tap-gesture-handler onGestureEvent="reset">
+    <scale-gesture-handler onGestureEvent="handleGesture">
+      <image class="svgMain" src="{{svgUri}}"></image>
+    </scale-gesture-handler>
+  </double-tap-gesture-handler>
+</view>
