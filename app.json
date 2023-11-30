@@ -1,0 +1,24 @@
+{
+  "componentFramework": "glass-easel",
+  "entryPagePath": "pages/proj853/index",
+  "lazyCodeLoading": "requiredComponents",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/proj853/index"
+  ],
+  "renderer": "webview",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "sdkVersionBegin": "3.0.0"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  }
+}
