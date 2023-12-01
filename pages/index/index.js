@@ -2,6 +2,7 @@
 
 Page({
   data: {
+    cardList:[true,false,false,false,false],
     cardTitleList: ["路网配线图", "路网配线图(旧版)", "站牌生成器", "反馈问题", "关于"],
     cardTextList: [
       "基于Skyline渲染引擎重构，缩放丝滑不卡顿",

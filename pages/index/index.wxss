@@ -1,7 +1,12 @@
 /** pages/index/index.wxss **/
 
-t-footer {
+/* t-footer {
   margin-bottom: env(safe-area-inset-bottom);
+} */
+
+.main {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .cardList {
@@ -16,7 +21,7 @@ t-footer {
   margin-bottom: 25rpx;
   padding: 30rpx;
   border-radius: 20rpx;
-  background-color: #f0f0f0;
+  background-color: white;
 }
 
 .cardHead {

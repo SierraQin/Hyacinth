@@ -1,4 +1,15 @@
 /* app.wxss */
+page {
+  background-color: #f6f6f6;
+}
+.main {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  padding-top: 48rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 .custom-title {
   margin-left: 16rpx;
