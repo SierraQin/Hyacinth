@@ -1,9 +1,16 @@
 <!-- pages/proj853/index.wxml -->
 
-<view>
+<view class="fullScreen">
   <double-tap-gesture-handler onGestureEvent="reset">
     <scale-gesture-handler onGestureEvent="handleGesture">
-      <image class="svgMain" src="{{svgUri}}"></image>
+      <view class="fullScreen svg_scale">
+        <view class="fullScreen svg_xy">
+          <image class="svgMain" id="svgProd" wx:if="{{!isDev}}" src="{{svgProd}}"></image>
+          <image class="svgMain" id="svgDev" wx:if="{{isDev}}" src="{{svgDev}}"></image>
+        </view>
+      </view>
     </scale-gesture-handler>
   </double-tap-gesture-handler>
 </view>
+
+<view bind:tap="switchSource">123</view>

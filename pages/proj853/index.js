@@ -13,45 +13,58 @@ const {
   spring
 } = wx.worklet;
 
+var defaultCoord = {
+  x: 318,
+  y: 728,
+  scale: 20
+};
+
+
 Page({
   data: {
-    svgUri: "https://metro-1252278458.cos.ap-beijing.myqcloud.com/svg/MTR2.4.1.svg"
+    isDev: false,
+    svgProd: "https://static.qinxr.cn/proj853/prod.svg",
+    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg"
   },
 
   onLoad(options) {
     const that = this;
 
-    wx.showLoading({
-      title: "数据加载中",
-      mask: true
-    });
-    wx.request({
-      url: "https://metro-1252278458.cos.ap-beijing.myqcloud.com/svg/MTR2.4.1.svg",
-      method: "GET",
-      success: function (r) {
-        let prodSvg = "data:image/svg+xml;base64," + Base64.encode(r.data);
-        that.setData({
-          svgUri: prodSvg,
-        });
-        wx.hideLoading({});
-      },
-    });
+
+
+
+
 
     // https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/gesture.html
 
-    const x = shared(0);
-    const y = shared(0);
-    const scale = shared(1);
-    this.applyAnimatedStyle('.svgMain', () => {
+    const scale = shared(defaultCoord.scale);
+    const x = shared(defaultCoord.x);
+    const y = shared(defaultCoord.y);
+    this.applyAnimatedStyle('.svg_xy', () => {
       "worklet";
       return {
-        transform: `translate(${x.value}px, ${y.value}px) scale(${ scale.value })`,
+        transform: `translate(${x.value}rpx, ${y.value}rpx)`,
       };
     });
+    this.applyAnimatedStyle('.svg_scale', () => {
+      "worklet";
+      return {
+        transform: `scale(${ scale.value })`,
+      };
+    });
+    this.scale = scale;
+    this.lastScale = shared(defaultCoord.scale);
     this.x = x;
     this.y = y;
-    this.scale = scale
-    this.lastScale = shared(1)
+
+
+
+  },
+
+  switchSource() {
+    this.setData({
+      isDev: !this.data.isDev
+    });
   },
 
   handleGesture(evt) {
@@ -66,6 +79,8 @@ Page({
     if (evt.state === GestureState.END || evt.state === GestureState.CANCELLED) {
       this.lastScale.value = this.scale.value;
     }
+
+    console.log("x: " + this.x.value + ", y: " + this.y.value + ", z: " + this.scale.value);
   },
 
   handleScale(evt) {
@@ -76,17 +91,17 @@ Page({
   handleDrag(evt) {
     "worklet";
     if (evt.state === GestureState.ACTIVE) {
-      this.x.value += evt.focalDeltaX * this.lastScale.value;
-      this.y.value += evt.focalDeltaY * this.lastScale.value;
+      this.x.value += evt.focalDeltaX * 2;
+      this.y.value += evt.focalDeltaY * 2;
     }
   },
 
   reset() {
     "worklet";
-    this.scale.value = 1;
-    this.lastScale.value = 1;
-    this.x.value = 0;
-    this.y.value = 0;
+    this.scale.value = defaultCoord.scale;
+    this.lastScale.value = defaultCoord.scale;
+    this.x.value = defaultCoord.x;
+    this.y.value = defaultCoord.y;
   },
 
 
