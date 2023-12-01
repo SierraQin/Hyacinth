@@ -5,7 +5,7 @@
   </view>
 
   <view class="cardList">
-    <view class="cardBg" wx:for="{{cardList}}" wx:if="{{cardList[index]}}" id="card-{{index}}" bind:tap="cardNaviHandler">
+    <view class="cardBg" wx:for="{{cardList}}" wx:if="{{cardList[index]}}" id="card-{{index}}" bind:tap="cardNaviHandler" style="background-image: url({{cardBgList[index]}});">
       <!-- style="background-image: url({{cardBgList[index]}});" -->
       <view class="card">
         <view class="cardHead">
