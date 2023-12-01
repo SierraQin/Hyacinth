@@ -1,2 +1,39 @@
 /** pages/index/index.wxss **/
 
+t-footer {
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.cardList {
+  margin-top: 48rpx;
+  margin-bottom: 48rpx;
+}
+
+.cardBg {
+  width: 650rpx;
+  height: 250rpx;
+  margin: 0 auto;
+  margin-bottom: 25rpx;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  background-color: #f0f0f0;
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 50rpx;
+  font-weight: bold;
+  margin: 5rpx;
+  margin-left: 10rpx;
+}
+
+.cardText {
+  margin-top: 5rpx;
+  max-width: 400rpx;
+  font-size: 30rpx;
+}

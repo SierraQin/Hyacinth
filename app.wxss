@@ -5,3 +5,8 @@
   font-size: 36rpx;
   font-weight: 600;
 }
+
+.block {
+  display: block;
+  margin-bottom: 48rpx;
+}

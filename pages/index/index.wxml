@@ -1,3 +1,19 @@
 <!-- pages/index/index.wxml -->
 
-pages/index/index
+<view class="block">
+  <t-navbar title="列车运行前方"></t-navbar>
+</view>
+
+<view class="cardList">
+  <view class="cardBg" wx:for="{{cardTitleList}}" id="card-{{index}}" bind:tap="cardNaviHandler">
+    <view class="card">
+      <view class="cardHead">
+        <t-icon name="{{cardIconList[index]}}" size="60rpx"></t-icon>
+        <view class="cardTitle">{{cardTitleList[index]}}</view>
+      </view>
+      <view class="cardText">{{cardTextList[index]}}</view>
+    </view>
+  </view>
+</view>
+
+<t-footer text="Made by SierraQin with ♥. License: LGPL-2.1"></t-footer>

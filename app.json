@@ -1,6 +1,5 @@
 {
-  "componentFramework": "glass-easel",
-  "entryPagePath": "pages/proj853/index",
+  "entryPagePath": "pages/index/index",
   "lazyCodeLoading": "requiredComponents",
   "networkTimeout": {
     "request": 10000,
