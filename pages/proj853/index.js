@@ -1,21 +1,21 @@
 // pages/proj853/index.js
 
-import {
-  GestureState
-} from "./workletUi.js";
-
-const {
-  Base64
-} = require('js-base64');
-
 const {
   shared,
   spring
 } = wx.worklet;
 
+import {
+  GestureState
+} from "./workletUi.js";
+
+import {
+  localData
+} from "./localData.js";
+
 var defaultCoord = {
   x: 318,
-  y: 728,
+  y: 738,
   scale: 20
 };
 
@@ -23,18 +23,18 @@ var defaultCoord = {
 Page({
   data: {
     isDev: false,
+
     svgProd: "https://static.qinxr.cn/proj853/prod.svg",
-    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg"
+    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
+
+    tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
+    tabBtnIconList: localData.iconB64,
   },
 
+
+
   onLoad(options) {
-    const that = this;
-
-
-
-
-
-
+    // 仿写自微信小程序官方Demo
     // https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/gesture.html
 
     const scale = shared(defaultCoord.scale);

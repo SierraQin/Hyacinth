@@ -13,4 +13,9 @@
   </double-tap-gesture-handler>
 </view>
 
-<view bind:tap="switchSource">123</view>
+<view class="tabBar">
+  <view class="tabBtn" wx:for="{{tabBtnTxtList}}" id="tabBtn-{{index}}" bind:tap="">
+    <image class="tabBtnIcon" src="{{tabBtnIconList[index]}}" mode="aspectFit"></image>
+    <view class="tabBtnText">{{tabBtnTxtList[index]}}</view>
+  </view>
+</view>
