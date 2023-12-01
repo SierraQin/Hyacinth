@@ -9,7 +9,7 @@
       <!-- style="background-image: url({{cardBgList[index]}});" -->
       <view class="card">
         <view class="cardHead">
-          <t-icon name="{{cardIconList[index]}}" size="60rpx"></t-icon>
+          <t-icon name="{{cardIconList[index]}}" size="55rpx"></t-icon>
           <view class="cardTitle">{{cardTitleList[index]}}</view>
         </view>
         <view class="cardText">{{cardTextList[index]}}</view>
