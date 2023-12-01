@@ -6,6 +6,7 @@
 
   <view class="cardList">
     <view class="cardBg" wx:for="{{cardList}}" wx:if="{{cardList[index]}}" id="card-{{index}}" bind:tap="cardNaviHandler">
+      <!-- style="background-image: url({{cardBgList[index]}});" -->
       <view class="card">
         <view class="cardHead">
           <t-icon name="{{cardIconList[index]}}" size="60rpx"></t-icon>
@@ -13,6 +14,7 @@
         </view>
         <view class="cardText">{{cardTextList[index]}}</view>
       </view>
+      <!-- <image class="cardBgImg" src="{{cardBgList[index]}}"></image> -->
     </view>
   </view>
 

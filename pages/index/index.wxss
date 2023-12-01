@@ -22,6 +22,8 @@
   padding: 30rpx;
   border-radius: 20rpx;
   background-color: white;
+  /* background-size: cover;
+  background-position: center; */
 }
 
 .cardHead {
