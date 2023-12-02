@@ -15,21 +15,31 @@ import {
 
 const app = getApp();
 
+const urlList = {
+  config: "https://static.qinxr.cn/proj853/config.json",
+  svgProd: "https://static.qinxr.cn/proj853/prod.svg",
+  svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
+  staticFiles: "https://static.qinxr.cn/proj853/",
+  artifacts: "https://mtr.qinxr.cn/build/"
+};
+
 var defaultCoord = {
   x: 318,
   y: 738,
   scale: 20
 };
 
+var allowDownload = true; // 默认false
+var cfg = null;
 
 Page({
   data: {
     // Const
-    svgProd: "https://static.qinxr.cn/proj853/prod.svg",
-    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
+    svgProd: urlList.svgProd,
+    svgDev: urlList.svgDev,
     tabBtnIconList: localData.iconB64,
     tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
-    msgBoxTitleList: ["const that = this;", "配线图版本切换", "PDF文件下载", "配线图说明","临时通知标题"],
+    msgBoxTitleList: ["const that = this;", "配线图版本切换", "PDF文件下载", "配线图说明", "临时通知标题"],
 
     // Init Value
     devInfo: {
@@ -47,6 +57,7 @@ Page({
     // Settings
     menuCurr: 4,
     isDev: false,
+    msgBox2btnTxt: "下载PDF",
 
     // Layout
     infoPos: app.globalData.capsuleHeight,
@@ -82,9 +93,10 @@ Page({
     this.y = y;
 
     wx.request({
-      url: "https://static.qinxr.cn/proj853/config.json",
+      url: urlList.config,
       method: "GET",
       success(res) {
+        cfg = res.data;
         that.setData({
           devInfo: res.data.dev,
           prodInfo: res.data.prod
@@ -134,6 +146,70 @@ Page({
   switchSource() {
     this.setData({
       isDev: !this.data.isDev
+    });
+  },
+
+  downloadPdf() {
+    const that = this;
+
+    if (!allowDownload) {
+      return;
+    }
+
+    wx.showLoading({
+      title: "下载中...",
+      mask: true,
+    });
+
+    allowDownload = false;
+    that.setData({
+      msgBox2btnTxt: "请稍候"
+    });
+
+    const fsm = wx.getFileSystemManager();
+    var fileName = ""
+    var pdfUrl = ""
+
+    if (this.data.isDev) {
+      let d = cfg.dev.date;
+      fileName = "MTR" + d.slice(2, 4) + d.slice(5, 7) + d.slice(8, 10) + "_dev-" + cfg.dev.shaShort + ".pdf"
+      pdfUrl = urlList.artifacts + fileName;
+    } else {
+      fileName = "MTR" + cfg.prod.ver + ".pdf"
+      pdfUrl = urlList.staticFiles + fileName;
+    }
+
+    console.log(pdfUrl)
+
+    wx.downloadFile({
+      url: pdfUrl,
+      success(res) {
+        allowDownload = false;
+        that.setData({
+          msgBox2btnTxt: "已下载"
+        });
+        fsm.copyFileSync(res.tempFilePath, wx.env.USER_DATA_PATH + "/" + fileName);
+        wx.shareFileMessage({
+          filePath: wx.env.USER_DATA_PATH + "/" + fileName,
+          fileName: fileName,
+          fail: function () {
+            allowDownload = true;
+            that.setData({
+              msgBox2btnTxt: "下载PDF"
+            });
+          },
+          complete: function () {
+            wx.hideLoading({});
+          }
+        });
+      },
+      fail: function () {
+        allowDownload = true;
+        that.setData({
+          msgBox2btnTxt: "下载PDF"
+        });
+        wx.hideLoading({});
+      }
     });
   },
 
