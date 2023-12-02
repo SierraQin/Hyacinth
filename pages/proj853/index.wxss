@@ -22,14 +22,16 @@
 
 .infoArea {
   position: fixed;
+  right: 20rpx;
   /* display: block; */
   z-index: 99800;
+  color: #003380;
 }
 
 .infoLine {
   text-align: right;
   font-size: 20rpx;
-  max-width: 200rpx;
+  max-width: 240rpx;
 }
 
 .tabBar {

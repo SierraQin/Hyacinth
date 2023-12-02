@@ -2,6 +2,7 @@
 page {
   background-color: #f6f6f6;
 }
+
 .main {
   width: 100%;
   box-sizing: border-box;
@@ -20,4 +21,12 @@ page {
 .block {
   display: block;
   margin-bottom: 48rpx;
+}
+
+.red {
+  color: crimson;
+}
+
+.bold {
+  font-weight: bold;
 }

@@ -13,21 +13,17 @@
   </double-tap-gesture-handler>
 </view>
 
-<view class="infoArea">
-  <view wx:if="{{false}}">
-    <view class="infoLine">[ 正式版 ]</view>
-    <view class="infoLine">MTR2.4.1.svg</view>
-    <view class="infoLine">2023-01-01</view>
-    <view class="infoLine">SierraQin及其他贡献者</view>
-    <view class="infoLine">CC BY-SA 4.0</view>
+<view class="infoArea" style="top: {{infoPos+10}}px;">
+  <view wx:if="{{!isDev}}">
+    <view class="infoLine">MTR{{prodInfo.ver}}.svg</view>
+    <view class="infoLine">{{prodInfo.date}}</view>
   </view>
   <view wx:else>
-    <view class="infoLine red">[ 开发版 ]</view>
-    <view class="infoLine">dev-6b47c6e</view>
-    <view class="infoLine">2023-01-01 00:00:00</view>
-    <view class="infoLine">Sierra Qin</view>
-    <view class="infoLine multiLine"></view>
-    <view class="infoLine">CC BY-SA 4.0</view>
+    <view class="infoLine red bold">[ 开发版 ] dev-{{devInfo.shaShort}}</view>
+    <view class="infoLine">仅供预览，不代表最终效果</view>
+    <view class="infoLine">{{devInfo.date}}</view>
+    <view class="infoLine">{{devInfo.author}}</view>
+    <view class="infoLine multiLine">{{devInfo.msg}}</view>
   </view>
 </view>
 

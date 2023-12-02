@@ -13,6 +13,8 @@ import {
   localData
 } from "./localData.js";
 
+const app = getApp();
+
 var defaultCoord = {
   x: 318,
   y: 738,
@@ -24,6 +26,20 @@ Page({
   data: {
     isDev: false,
 
+    devInfo: {
+      author: "加载中",
+      date: "加载中",
+      msg: "加载中",
+      sha: "加载中",
+      shaShort: "加载中"
+    },
+    prodInfo: {
+      ver: "加载中",
+      date: "加载中"
+    },
+
+    infoPos: app.globalData.capsuleHeight,
+
     svgProd: "https://static.qinxr.cn/proj853/prod.svg",
     svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
 
@@ -34,9 +50,10 @@ Page({
 
 
   onLoad(options) {
+    const that = this;
+
     // 仿写自微信小程序官方Demo
     // https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/gesture.html
-
     const scale = shared(defaultCoord.scale);
     const x = shared(defaultCoord.x);
     const y = shared(defaultCoord.y);
@@ -57,6 +74,16 @@ Page({
     this.x = x;
     this.y = y;
 
+    wx.request({
+      url: "https://static.qinxr.cn/proj853/config.json",
+      method: "GET",
+      success(res) {
+        that.setData({
+          devInfo: res.data.dev,
+          prodInfo: res.data.prod
+        });
+      }
+    });
 
 
   },
