@@ -6,6 +6,7 @@ App({
     const that = this;
     wx.getSystemInfo({
       success(res) {
+        that.globalData.systemInfo = res;
         var cap = wx.getMenuButtonBoundingClientRect();
         if (cap) {
           that.globalData.capsuleHeight = cap.bottom;

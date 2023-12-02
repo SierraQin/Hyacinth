@@ -27,8 +27,20 @@
   </view>
 </view>
 
-<view class="tabBar">
-  <view class="tabBtn" wx:for="{{tabBtnTxtList}}" id="tabBtn-{{index}}" bind:tap="">
+<view class="mask fullScreen" wx:if="{{menuCurr!=0}}" bind:tap="hideMenu"></view>
+
+<view class="msgBox" wx:if="{{menuCurr!=0}}" style="top: {{msgBoxPos}}px; height: {{msgBoxHeight}}px;">
+  <view class="msgTitle">{{msgBoxTitleList[menuCurr]}}</view>
+  <view wx:if="{{menuCurr==1}}"></view>
+  <view wx:if="{{menuCurr==2}}"></view>
+  <view wx:if="{{menuCurr==3}}"></view>
+  <view wx:if="{{menuCurr==4}}">
+    <text style="text-align: left; padding: 10rpx;">{{"\n这是临时通知，具体内容从后端api或静态json配置文件现场拉取\n需要调整样式，需要增加定时关闭，需要改为列表渲染\n\n双击配线图也可以重置缩放\n\n！！！ 点击空白区域关闭 ！！！"}}</text>
+  </view>
+</view>
+
+<view class="tabBar" id="tabBarMain">
+  <view class="tabBtn" wx:for="{{tabBtnTxtList}}" id="tabBtn-{{index}}" bind:tap="tabBtnHandler">
     <image class="tabBtnIcon" src="{{tabBtnIconList[index]}}" mode="aspectFit"></image>
     <view class="tabBtnText">{{tabBtnTxtList[index]}}</view>
   </view>

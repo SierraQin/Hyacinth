@@ -24,8 +24,14 @@ var defaultCoord = {
 
 Page({
   data: {
-    isDev: false,
+    // Const
+    svgProd: "https://static.qinxr.cn/proj853/prod.svg",
+    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
+    tabBtnIconList: localData.iconB64,
+    tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
+    msgBoxTitleList: ["const that = this;", "配线图版本切换", "PDF文件下载", "配线图说明","临时通知标题"],
 
+    // Init Value
     devInfo: {
       author: "加载中",
       date: "加载中",
@@ -38,18 +44,19 @@ Page({
       date: "加载中"
     },
 
+    // Settings
+    menuCurr: 4,
+    isDev: false,
+
+    // Layout
     infoPos: app.globalData.capsuleHeight,
-
-    svgProd: "https://static.qinxr.cn/proj853/prod.svg",
-    svgDev: "https://mtr.qinxr.cn/src/MTR2.svg",
-
-    tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
-    tabBtnIconList: localData.iconB64,
+    msgBoxPos: app.globalData.systemInfo.windowHeight * 0.3,
+    msgBoxHeight: 0,
   },
 
 
 
-  onLoad(options) {
+  onLoad() {
     const that = this;
 
     // 仿写自微信小程序官方Demo
@@ -85,7 +92,43 @@ Page({
       }
     });
 
+    let h = 100;
+    const sq = wx.createSelectorQuery();
+    sq.select("#tabBarMain").boundingClientRect();
+    sq.selectViewport().scrollOffset();
+    sq.exec(function (res) {
+      h = res[0].top - app.globalData.systemInfo.windowHeight * 0.3 - 20 / 750 * app.globalData.systemInfo.screenWidth;
+      that.setData({
+        msgBoxHeight: h
+      });
+    });
 
+  },
+
+  tabBtnHandler(evt) {
+    var idx = parseInt(evt.currentTarget.id.slice(7));
+
+    if (idx == 0) {
+      this.reset();
+      this.setData({
+        menuCurr: 0
+      });
+    } else if (idx == this.data.menuCurr) {
+      this.setData({
+        menuCurr: 0
+      });
+      return;
+    } else if (idx < 4) {
+      this.setData({
+        menuCurr: idx
+      });
+    }
+  },
+
+  hideMenu() {
+    this.setData({
+      menuCurr: 0
+    });
   },
 
   switchSource() {

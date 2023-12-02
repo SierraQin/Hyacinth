@@ -24,7 +24,7 @@
   position: fixed;
   right: 20rpx;
   /* display: block; */
-  z-index: 99800;
+  z-index: 99600;
   color: #003380;
 }
 
@@ -71,3 +71,25 @@
   font-size: 20rpx;
   color: #003380
 }
+
+.mask {
+  position: fixed;
+  z-index: 99700;
+  background-color: white;
+  opacity: 0.4;
+}
+
+.msgBox {
+  position: fixed;
+  z-index: 99800;
+  width: 650rpx;
+  left: 50rpx;
+  text-align: center;
+  border: 5rpx solid #003380;
+  border-radius: 10rpx;
+  background-color: white;
+}
+
+.msgTitle {}
+
+.msgText {}
