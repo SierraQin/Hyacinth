@@ -20,6 +20,18 @@
   opacity: 0.4;
 }
 
+.infoArea {
+  position: fixed;
+  /* display: block; */
+  z-index: 99800;
+}
+
+.infoLine {
+  text-align: right;
+  font-size: 20rpx;
+  max-width: 200rpx;
+}
+
 .tabBar {
   position: fixed;
   /* display: block; */

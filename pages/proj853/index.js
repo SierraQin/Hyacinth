@@ -80,7 +80,7 @@ Page({
       this.lastScale.value = this.scale.value;
     }
 
-    console.log("x: " + this.x.value + ", y: " + this.y.value + ", z: " + this.scale.value);
+    // console.log("x: " + this.x.value + ", y: " + this.y.value + ", z: " + this.scale.value);
   },
 
   handleScale(evt) {
