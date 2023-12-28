@@ -1,6 +1,7 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-footer": "tdesign-miniprogram/footer/footer",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-navbar": "tdesign-miniprogram/navbar/navbar"

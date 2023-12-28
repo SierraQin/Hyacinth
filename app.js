@@ -2,6 +2,7 @@
 
 App({
   globalData: {},
+
   onLaunch() {
     const that = this;
     wx.getSystemInfo({
@@ -15,5 +16,6 @@ App({
         }
       }
     });
+    that.globalData.skylineInfo = wx.getSkylineInfoSync();
   }
 });

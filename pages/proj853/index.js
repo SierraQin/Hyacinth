@@ -244,6 +244,8 @@ Page({
 
   reset() {
     "worklet";
+    // 暂时屏蔽
+    return;
     this.scale.value = defaultCoord.scale;
     this.lastScale.value = defaultCoord.scale;
     this.x.value = defaultCoord.x;

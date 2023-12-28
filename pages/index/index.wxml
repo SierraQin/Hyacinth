@@ -18,6 +18,15 @@
     </view>
   </view>
 
+  <t-dialog visible="{{dialogId==0}}" title="运行环境不兼容" confirm-btn="{{dialog853Btn}}" bind:confirm="dialogCloseHandler">
+    <scroll-view slot="content" scroll-y class="long-content">
+      <view class="content-container">Skyline渲染引擎的部分功能在您当前版本的微信客户端中无法正常运行，请尝试更新您的微信客户端，直至此对话框不再显示。</view>
+      <view class="content-container">当然，您也可以直接进入新版路网配线图页面。在此情况下，可能导致页面无法正常显示，或微信小程序直接崩溃等情况。</view>
+      <view class="content-container">当前问题: </view>
+      <text class="content-container" style="font-size: 24rpx; color: red;">{{compatibility853.msg}}</text>
+    </scroll-view>
+  </t-dialog>
+
   <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1"></t-footer>
 
 </view>
