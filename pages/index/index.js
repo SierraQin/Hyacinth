@@ -99,13 +99,13 @@ Page({
     }
 
     if (semver.lt(c.sdk.curr, c.sdk.required)) {
-      r += `小程序基础库: 当前 ${c.wechat.curr} , 要求 >=${c.wechat.required}\n`;
+      r += `小程序基础库: 当前 ${c.sdk.curr} , 要求 >=${c.sdk.required}\n`;
     }
 
     if (!c.skyline.supported) {
       r += "Skyline渲染引擎: 不支持";
     } else if (semver.lt(c.skyline.curr, c.skyline.required)) {
-      r += `Skyline渲染引擎: 当前 ${c.wechat.curr} , 要求 >=${c.wechat.required}\n`;
+      r += `Skyline渲染引擎: 当前 ${c.skyline.curr} , 要求 >=${c.skyline.required}\n`;
     }
 
     return r;
