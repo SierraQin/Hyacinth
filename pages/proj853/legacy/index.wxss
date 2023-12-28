@@ -1,0 +1,237 @@
+/** pages/proj853/legacy/index.wxss **/
+
+element {
+  user-select: none;
+}
+
+#scrollDiv {
+  width: 750rpx;
+}
+
+#mtrSvg {
+  background-color: none;
+}
+
+#zoomBarDiv {
+  position: fixed;
+  z-index: 99900;
+  bottom: 0rpx;
+  width: 750rpx;
+  margin-bottom: 35rpx;
+  align-items: center;
+  text-align: center;
+}
+
+#zoomBar {
+  width: 670rpx;
+}
+
+#bottomTxt {
+  text-align: center;
+  font-size: 25rpx;
+  font-weight: bold;
+  color: #003380;
+}
+
+#sideMenuDiv {
+  position: fixed;
+  z-index: 99912;
+  right: 20rpx;
+  top: 160rpx;
+  width: 100rpx;
+}
+
+.sideMenuCard {
+  width: 95rpx;
+  height: 125rpx;
+  border-radius: 10rpx;
+  border: 5rpx solid #003380;
+  background-color: white;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+.sideMenuImg {
+  margin: 10rpx;
+  margin-bottom: 0rpx;
+  width: 75rpx;
+  height: 75rpx;
+}
+
+.sideMenuTxt {
+  font-size: 20rpx;
+  color: #003380;
+}
+
+.msgDiv {
+  position: fixed;
+  z-index: 99913;
+  width: 570rpx;
+  height: 520rpx;
+  top: 160rpx;
+  left: 20rpx;
+  border-radius: 10rpx;
+  border: 5rpx solid #003380;
+  padding: 15rpx;
+  background-color: white;
+  text-align: center;
+  align-items: center;
+
+
+}
+
+.msgCapTxt {
+  display: block;
+  padding: 10rpx;
+  padding-top: 20rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #003380;
+}
+
+.msgTxt {
+  display: block;
+  padding: 20rpx;
+  font-size: 30rpx;
+  text-align: justify;
+  color: #003380;
+}
+
+.msgChk {
+  display: block;
+  padding: 20rpx;
+  font-size: 30rpx;
+  color: #003380;
+}
+
+.msgIpt {
+  margin: 10rpx;
+  padding: 10rpx;
+  width: 490rpx;
+  font-size: 28rpx;
+  text-align: center;
+  color: #003380;
+  background-color: white;
+}
+
+.msgBtnDiv {
+  margin: 150rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  border: 5rpx solid #003380;
+
+}
+
+.msgBtnTxt {
+  display: block;
+  font-size: 30rpx;
+  text-align: center;
+  color: #003380;
+  font-weight: bold;
+}
+
+.msgSubDiv {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 20rpx;
+  background-color: lightgrey;
+  height: 360rpx;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#msgBysaImg {
+  width: 240rpx;
+  height: 84rpx;
+  margin-bottom: 10rpx;
+}
+
+
+.msgBottomDiv {
+  position: fixed;
+  width: 570rpx;
+  top: 655rpx;
+  text-align: center;
+}
+
+.msgBottomTxt {
+  display: block;
+  font-size: 30rpx;
+  text-align: center;
+  color: #003380;
+  font-weight: bold;
+}
+
+#msgBoxCover {
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  z-index: 99911;
+  width: 750rpx;
+}
+
+#crossDiv {
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 99901;
+}
+
+#crossImg {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+#devinfoDiv {
+  width: 500rpx;
+  position: fixed;
+  z-index: 99902;
+  top: 20rpx;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  opacity: 0.314159;
+}
+
+.devinfoTxtUp {
+  color: red;
+  font-size: 30rpx;
+}
+
+.devinfoTxtDn {
+  display: block;
+  color: #003380;
+  font-size: 20rpx;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.noSpaceTop {
+  margin-top: 0rpx;
+  padding-top: 0rpx;
+}
+
+.noMargin {
+  margin-top: 0rpx;
+  margin-bottom: 0rpx;
+  padding-top: 0rpx;
+  padding-bottom: 0rpx;
+}

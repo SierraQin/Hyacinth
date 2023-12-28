@@ -16,7 +16,7 @@ Page({
     cardTitleList: ["路网配线图", "路网配线图(旧)", "占位", "占位", "占位", "占位", "占位", "占位"],
     cardTextList: [
       "基于Skyline渲染引擎彻底进行重构，显著降低掉帧卡顿",
-      "旧版小程序，专为Mac及较老版本微信保留（占位）",
+      "旧版小程序，专为PC端及较老版本微信保留",
       "（占位）",
       "（占位）",
       "（占位）",
@@ -36,7 +36,7 @@ Page({
     ],
     cardUrlList: [
       "/pages/proj853/index",
-      "",
+      "/pages/proj853/legacy/index",
       "",
       "",
       "",
@@ -91,7 +91,7 @@ Page({
     if (c.platform.curr == "devtools") {
       //return "";
     } else if (c.platform.curr != "ios" && c.platform.curr != "android") {
-      return `操作系统: ${c.platform.curr} , 要求 android或ios`;
+      return `操作系统: 当前 ${c.platform.curr} , 要求 android/ios`;
     }
 
     if (semver.lt(c.wechat.curr, c.wechat.required)) {
@@ -136,8 +136,12 @@ Page({
               msg: m
             }
           });
-          console.log(that.data)
         }
+      }
+      default: {
+        wx.navigateTo({
+          url: that.data.cardUrlList[idx]
+        });
       }
     }
   }

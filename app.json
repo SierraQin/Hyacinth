@@ -7,7 +7,8 @@
   },
   "pages": [
     "pages/index/index",
-    "pages/proj853/index"
+    "pages/proj853/index",
+    "pages/proj853/legacy/index"
   ],
   "renderer": "webview",
   "rendererOptions": {

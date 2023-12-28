@@ -1,0 +1,101 @@
+<!-- pages/proj853/legacy/index.wxml -->
+
+<scroll-view id="scrollDiv" style="height: {{avilHeight}}rpx;" scroll-x="true" scroll-y="true" enhanced="true" model:scroll-top="{{scrollTop}}" model:scroll-left="{{scrollLeft}}" bindscroll="getScrollPos">
+  <image id="mtrSvg" src="{{svgUri}}" style="width: {{750*zoom}}rpx; height: {{750*zoom}}rpx;" bindtouchstart="touchStartEvt" bindtouchmove="touchMoveEvt" bindtouchend="touchEndEvt"></image>
+</scroll-view>
+
+
+<view id="zoomBarDiv">
+  <slider id="zoomBar" min="0" max="100" block-size="{{50*rpx2px}}" activeColor="#003380" backgroundColor="#003380" model:value="{{zoomBarVar}}" bindchange="zooming"></slider>
+  <text id="bottomTxt" bindtap="enableCrossHair">{{currInfo}}</text>
+</view>
+
+
+<view id="sideMenuDiv">
+  <view class="sideMenuCard" wx:for="{{sideMenuTxt}}" id="sM-{{index}}" bindtap="sideMenuActions">
+    <image class="sideMenuImg" src="{{iconB64[index]}}"></image>
+    <view class="sideMenuTxt">{{sideMenuTxt[index]}}</view>
+  </view>
+</view>
+
+<view wx:if="{{msgBoxShow}}">
+
+  <view class="msgDiv" wx:if="{{msgBoxIdx==1}}">
+    <text class="msgCapTxt">项目说明</text>
+    <view class="msgSubDiv">
+
+      <text class="msgCapTxt">配线图 项目主页</text>
+      <text class="msgTxt noMargin">项目主页提供配线图的完整说明、历史修改记录、使用指南、PDF直接下载、完整源文件等内容。</text>
+      <text class="msgTxt noMargin" style="padding-top: 10rpx;">复制链接到浏览器访问项目主页：</text>
+      <input class="msgIpt" value="https://github.com/SierraQin/metro"></input>
+
+      <text class="msgCapTxt"></text>
+
+      <!--<text class="msgCapTxt">北京市轨道交通线路配置图</text>
+      <text class="msgTxt bold noMargin">[作者] SierraQin 及其他贡献者
+        [版本] {{mpCfg.prod.ver}}
+        [日期] {{mpCfg.prod.date}}</text>
+      <text class="msgTxt noSpaceTop" style="padding-top: 10rpx;">{{mpInfo.mtrInfo}}</text>
+      <image id="msgBysaImg" src="{{tcosUrl}}img/by-sa.svg"></image>
+      <text class="msgCapTxt"> </text> -->
+
+      <text class="msgCapTxt">联系作者</text>
+      <text class="msgTxt bold noMargin" style="padding-top: 20rpx;">配线图作者：SierraQin</text>
+      <text class="msgTxt noMargin">QQ：6468085\n微博：@SierraQin\n邮件：sierra@qinxr.cn\n随时准备倾听您的意见和建议\n当然也欢迎闲聊 :-)</text>
+      <text class="msgCapTxt"> </text>
+
+    </view>
+    <view class="msgBottomDiv">
+      <text class="msgBottomTxt">[ 点击其他空白区域返回 ]</text>
+    </view>
+  </view>
+
+  <view class="msgDiv" wx:if="{{msgBoxIdx==2}}">
+    <text class="msgCapTxt">下载PDF</text>
+    <text class="msgTxt bold" style="padding-bottom: 10rpx;">当前版本：{{pdfVer}}</text>
+    <text class="msgTxt noSpaceTop">点击下方按钮后，请您耐心等候片刻。并在随后弹出的聊天列表中，选择将文件转发给文件传输助手或自己。</text>
+    <view class="msgBtnDiv noSpaceTop">
+      <text class="msgBtnTxt" bindtap="downloadPdf">{{msgBox2btnTxt}}</text>
+    </view>
+    <text class="msgTxt noSpaceTop">此外，您也可以前往项目主页，通过百度网盘等多种方式手动下载PDF文件。</text>
+    <view class="msgBottomDiv">
+      <text class="msgBottomTxt">[ 点击其他空白区域返回 ]</text>
+    </view>
+  </view>
+
+  <view class="msgDiv" wx:if="{{msgBoxIdx==3}}">
+    <text class="msgCapTxt">查看开发版配线图</text>
+    <text class="msgTxt bold" style="padding-bottom: 10rpx;">当前版本：{{cmitHash}}</text>
+    <text class="msgTxt noSpaceTop">开发版中一般会存在临时性或过程性内容，同时部分正式版内容也可能会被暂时隐藏。开发版不代表下个正式版本的最终效果，并可能会与正式版的内容和样式存在较大的差异。</text>
+    <checkbox class="msgChk" disabled="{{!enableDev}}" model:checked="{{viewDev}}" bindtap="devView">显示开发版内容</checkbox>
+    <view class="msgBottomDiv">
+      <text class="msgBottomTxt">[ 点击其他空白区域返回 ]</text>
+    </view>
+  </view>
+
+  <view class="msgDiv" wx:if="{{msgBoxIdx==4}}">
+    <text class="msgCapTxt">尝试使用新版看图页面</text>
+    <text class="msgTxt">新版页面现已开放使用，入口位于小程序首页。新版页面基于Skyline渲染引擎彻底进行重构，显著降低掉帧卡顿。</text>
+    <text class="msgCapTxt">此页面现已停止维护</text>
+    <text class="msgTxt">本页面(仅指当前页面而非整个小程序)现已停止更新，并计划在后续被移除。请使用新版看图页。</text>
+    <text class="msgCapTxt noMargin"></text>
+    <!-- navigator class="msgTxt noSpaceTop" target="miniProgram" open-type="navigate" app-id="wxebadf544ddae62cb" path="pages/survey/index?sid=9384257&hash=48fa" version="release" style="text-align: center;text-decoration: underline;">
+      点我填写问卷
+    </navigator -->
+    <view class="msgBottomDiv">
+      <text class="msgBottomTxt">[ 点击其他空白区域关闭 ]</text>
+    </view>
+  </view>
+
+  <view id="msgBoxCover" style="height: {{avilHeight}}rpx;" bindtap="hideMsgBox"></view>
+</view>
+
+<view class="center" id="crossDiv" wx:if="{{crosshairShow}}">
+  <image id="crossImg" src="{{crosshairB64}}"></image>
+</view>
+
+<view wx:if="{{showCmitInfo}}" id="devinfoDiv">
+  <text class="devinfoTxtUp bold">{{"您正查看的是开发版本\n不代表正式发行版最终效果"}}</text>
+  <text class="devinfoTxtDn">{{cmitInfo1}}</text>
+  <text class="devinfoTxtDn">{{cmitInfo2}}</text>
+</view>
