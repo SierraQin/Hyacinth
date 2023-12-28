@@ -16,9 +16,9 @@
   transform-origin: center;
 }
 
-#svgDev {
+/* #svgDev {
   opacity: 0.6;
-}
+} */
 
 .infoArea {
   position: fixed;
@@ -84,12 +84,67 @@
   z-index: 99800;
   width: 650rpx;
   left: 50rpx;
+  padding: 30rpx;
   text-align: center;
   border: 5rpx solid #003380;
   border-radius: 10rpx;
   background-color: white;
+  color: #003380;
 }
 
-.msgTitle {}
+.msgTitle {
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+}
 
-.msgText {}
+.msgScroll {
+  height: 500rpx;
+}
+
+.msgText {
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  text-align: justify;
+}
+
+.msgBtn {
+  text-align: center;
+  margin: 0 auto;
+  border: 2rpx solid #003380;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+#msgBtn_2 {
+  padding: 30rpx;
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+  width: 400rpx;
+}
+
+.msgMiniCard {
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  padding: 20rpx;
+  border: 2rpx solid #003380;
+  border-radius: 5rpx;
+}
+
+.msg_active {
+  color: #003380;
+  background-color: #d9e1ec;
+}
+
+.msg_inactive {
+  color: #6685b3;
+  background-color: white;
+}
+
+.msgMiniTitle {
+  font-size: 42rpx;
+  font-weight: bold;
+  text-align: left;
+}

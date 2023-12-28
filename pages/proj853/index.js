@@ -29,7 +29,6 @@ var defaultCoord = {
   scale: 20
 };
 
-var allowDownload = true; // 默认false
 var cfg = null;
 
 Page({
@@ -57,12 +56,14 @@ Page({
     // Settings
     menuCurr: 4,
     isDev: false,
-    msgBox2btnTxt: "下载PDF",
+    allowDownload: false,
+    msgBox2btnTxt: "加载中",
 
     // Layout
     infoPos: app.globalData.capsuleHeight,
     msgBoxPos: app.globalData.systemInfo.windowHeight * 0.3,
-    msgBoxHeight: 0,
+    msgBoxBottom: 120,
+    msgBoxHeight: 100,
   },
 
 
@@ -99,18 +100,23 @@ Page({
         cfg = res.data;
         that.setData({
           devInfo: res.data.dev,
-          prodInfo: res.data.prod
+          prodInfo: res.data.prod,
+          allowDownload: true,
+          msgBox2btnTxt: "下载PDF"
         });
       }
     });
 
     let h = 100;
+    let b = 120;
     const sq = wx.createSelectorQuery();
     sq.select("#tabBarMain").boundingClientRect();
     sq.selectViewport().scrollOffset();
     sq.exec(function (res) {
+      b = app.globalData.systemInfo.windowHeight + 20 / 750 * app.globalData.systemInfo.screenWidth - res[0].top;
       h = res[0].top - app.globalData.systemInfo.windowHeight * 0.3 - 20 / 750 * app.globalData.systemInfo.screenWidth;
       that.setData({
+        msgBoxBottom: b,
         msgBoxHeight: h
       });
     });
@@ -121,7 +127,7 @@ Page({
     var idx = parseInt(evt.currentTarget.id.slice(7));
 
     if (idx == 0) {
-      this.reset();
+      this.resetZoom();
       this.setData({
         menuCurr: 0
       });
@@ -145,14 +151,31 @@ Page({
 
   switchSource() {
     this.setData({
-      isDev: !this.data.isDev
+      isDev: !this.data.isDevv,
+      allowDownload: true
+    });
+  },
+
+  switch2Prod() {
+    this.setData({
+      isDev: false,
+      menuCurr: 0,
+      allowDownload: true
+    });
+  },
+
+  switch2Dev() {
+    this.setData({
+      isDev: true,
+      menuCurr: 0,
+      allowDownload: true
     });
   },
 
   downloadPdf() {
     const that = this;
 
-    if (!allowDownload) {
+    if (!that.data.allowDownload) {
       return;
     }
 
@@ -161,8 +184,8 @@ Page({
       mask: true,
     });
 
-    allowDownload = false;
     that.setData({
+      allowDownload: false,
       msgBox2btnTxt: "请稍候"
     });
 
@@ -184,17 +207,22 @@ Page({
     wx.downloadFile({
       url: pdfUrl,
       success(res) {
-        allowDownload = false;
         that.setData({
+          allowDownload: false,
           msgBox2btnTxt: "已下载"
         });
         fsm.copyFileSync(res.tempFilePath, wx.env.USER_DATA_PATH + "/" + fileName);
         wx.shareFileMessage({
           filePath: wx.env.USER_DATA_PATH + "/" + fileName,
           fileName: fileName,
-          fail: function () {
-            allowDownload = true;
+          success: function () {
             that.setData({
+              menuCurr: 0
+            });
+          },
+          fail: function () {
+            that.setData({
+              allowDownload: true,
               msgBox2btnTxt: "下载PDF"
             });
           },
@@ -204,8 +232,8 @@ Page({
         });
       },
       fail: function () {
-        allowDownload = true;
         that.setData({
+          allowDownload: true,
           msgBox2btnTxt: "下载PDF"
         });
         wx.hideLoading({});
@@ -242,10 +270,8 @@ Page({
     }
   },
 
-  reset() {
+  resetZoom() {
     "worklet";
-    // 暂时屏蔽
-    return;
     this.scale.value = defaultCoord.scale;
     this.lastScale.value = defaultCoord.scale;
     this.x.value = defaultCoord.x;
