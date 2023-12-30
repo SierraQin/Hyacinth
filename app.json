@@ -7,6 +7,7 @@
   },
   "pages": [
     "pages/index/index",
+    "pages/about/index",
     "pages/proj853/index",
     "pages/proj853/legacy/index"
   ],

@@ -1,0 +1,21 @@
+/** pages/about/index.wxss **/
+
+.main {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.licenseContainer {
+  overflow-x: scroll;
+  line-height: normal;
+}
+
+.licenseTitle {
+  font-weight: bold;
+  font-size: 22rpx;
+}
+
+.licenseText {
+  font-size: 18rpx;
+  line-height: 20rpx;
+}

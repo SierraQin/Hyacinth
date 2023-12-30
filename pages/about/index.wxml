@@ -1,0 +1,57 @@
+<!-- pages/about/index.wxml -->
+
+<view class="main">
+  <view class="block">
+    <t-navbar title="关于..." left-arrow bind:go-back="navBackHandler"></t-navbar>
+  </view>
+
+  <view class="x-title">关于</view>
+  <view class="x-desc">微信小程序: 列车运行前方</view>
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title"></view>
+      <view class="x-block-header-desc"></view>
+    </view>
+  </view>
+
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title">开放源代码许可</view>
+      <view class="x-block-header-desc">本项目</view>
+    </view>
+    <view class="x-block-block">
+      <t-collapse>
+        <t-collapse-panel header="{{libCurr.name}}">
+          <view class="licenseContainer">
+            <view class="licenseTitle">{{"Repo: "+libCurr.repoUrl}}</view>
+            <view style="height: 20rpx;"> </view>
+            <text class="licenseText" space="nbsp">{{libCurr.license}}</text>
+          </view>
+        </t-collapse-panel>
+      </t-collapse>
+    </view>
+  </view>
+
+  <view class="x-block_notitle x-block_notitle">
+    <view class="x-block-header">
+      <view class="x-block-header-desc x-block-desconly">本项目使用的库</view>
+    </view>
+    <view class="x-block-block">
+      <t-collapse>
+        <t-collapse-panel wx:for="{{libList}}" header="{{item.name}}" value="{{index}}">
+          <view class="licenseContainer">
+            <view class="licenseTitle">{{item.name+" is used by:\n"}}</view>
+            <view class="licenseTitle" wx:for="{{item.usedBy}}" wx:for-item="i">{{i+"\n"}}</view>
+            <view style="height: 20rpx;"> </view>
+            <text class="licenseText" space="nbsp">{{item.license}}</text>
+          </view>
+        </t-collapse-panel>
+      </t-collapse>
+    </view>
+  </view>
+
+  <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+
+</view>

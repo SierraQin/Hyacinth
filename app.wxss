@@ -30,3 +30,60 @@ page {
 .bold {
   font-weight: bold;
 }
+
+.x-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 64rpx;
+  margin: 48rpx 32rpx 0;
+  color: var(--td-font-gray-1, rgba(0, 0, 0, 0.9));
+}
+
+.x-desc {
+  font-size: 28rpx;
+  color: var(--td-font-gray-2, rgba(0, 0, 0, 0.6));
+  margin: 16rpx 32rpx 0;
+  line-height: 44rpx;
+}
+
+.x-text {
+  font-size: 28rpx;
+  color: var(--td-font-gray-1, rgba(0, 0, 0, 0.9));
+  margin: 16rpx 32rpx 0;
+  line-height: 44rpx;
+}
+
+.x-block {
+  margin: var(--td-spacer-4, 64rpx) 0 0;
+}
+
+.x-block_notitle {
+  margin-top: 0;
+}
+
+.x-block_notitle .x-block-desconly {
+  margin-top: var(--td-spacer-3, 48rpx);
+}
+
+.x-block-header {
+  color: #000;
+  margin: 0 var(--td-spacer-2, 32rpx);
+}
+
+.x-block-header-title {
+  font-weight: 700;
+  font-size: 36rpx;
+  line-height: 52rpx;
+}
+
+.x-block-header-desc {
+  margin-top: var(--td-spacer, 16rpx);
+  font-size: var(--td-font-size-base, 28rpx);
+  white-space: pre-line;
+  color: var(--td-font-gray-2, rgba(0, 0, 0, 0.6));
+  line-height: 22px;
+}
+
+.x-block-block {
+  margin-top: var(--td-spacer-2, 32rpx);
+}

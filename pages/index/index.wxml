@@ -1,4 +1,5 @@
 <!-- pages/index/index.wxml -->
+
 <view class="main">
   <view class="block">
     <t-navbar title="列车运行前方"></t-navbar>
