@@ -19,7 +19,7 @@ Page({
       "旧版小程序，专为PC端及较老版本微信保留",
       "（占位）",
       "站区管界查询",
-      "（占位）",
+      "帮助作者创造更好的用户体验",
       "关于列车运行前方小程序",
       "（占位）",
       "（占位）",
@@ -68,8 +68,6 @@ Page({
       }
     });
   },
-
-  
 
   check853Compatibility() {
     let c = {
@@ -140,6 +138,13 @@ Page({
             }
           });
         }
+        return;
+      }
+      case 4: {
+        wx.openEmbeddedMiniProgram({
+          appId: 'wxebadf544ddae62cb',
+          path: 'pages/survey/index?sid=13966659&hash=83fc&navigateBackMiniProgram=true',
+        });
         return;
       }
       default: {
