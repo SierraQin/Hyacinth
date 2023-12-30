@@ -189,18 +189,9 @@ Page({
   },
 
   onShareAppMessage: function () {
-    if (advShare) {
-      sharePath = "/pages/index/index?x=" + currX + "&y=" + currY + "&v=" + currV;
-      advShare = false;
-    } else {
-      sharePath = "/pages/index/index";
-    }
-
     return {
       title: "北京轨道交通线路配置图",
-      desc: "版本" + mpCfg.prod.ver,
-      imageUrl: tcosUrl + "img/mpShare.png",
-      path: sharePath
+      path: "/pages/index/index"
     };
   },
 

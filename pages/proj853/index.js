@@ -62,7 +62,7 @@ Page({
     },
 
     // Settings
-    menuCurr: 3,
+    menuCurr: 4,
     isDev: false,
     allowDownload: false,
     msgBox2btnTxt: "加载中",
@@ -101,6 +101,13 @@ Page({
     this.x = x;
     this.y = y;
 
+    var op = wx.getEnterOptionsSync().query;
+    if (op.dev != undefined) {
+      this.setData({
+        isDev: true
+      });
+    }
+
     wx.request({
       url: urlList.config,
       method: "GET",
@@ -131,6 +138,20 @@ Page({
 
   },
 
+  onShareAppMessage() {
+    // 为了避免捕捉返回事件带来的复杂逻辑，后续计划所有分享页面均以传参的方式通过 /pages/index/index 页面进行跳转
+
+    let title = `北京地铁路网配线图 ${this.isDev?this.prodInfo.ver:"开发版"}`;
+    let path = `/pages/proj853/index${this.isDev?"?dev":""}`;
+    // 分享头图还没做好
+    let imageUrl = "";
+    return {
+      title,
+      //imageUrl
+      path
+    };
+  },
+
   tabBtnHandler(evt) {
     var idx = parseInt(evt.currentTarget.id.slice(7));
 
@@ -159,7 +180,7 @@ Page({
 
   switchSource() {
     this.setData({
-      isDev: !this.data.isDevv,
+      isDev: !this.data.isDev,
       allowDownload: true
     });
   },
@@ -209,8 +230,6 @@ Page({
       fileName = "MTR" + cfg.prod.ver + ".pdf"
       pdfUrl = urlList.staticFiles + fileName;
     }
-
-    console.log(pdfUrl)
 
     wx.downloadFile({
       url: pdfUrl,
