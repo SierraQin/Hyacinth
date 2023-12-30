@@ -37,8 +37,16 @@ Page({
     svgProd: urlList.svgProd,
     svgDev: urlList.svgDev,
     tabBtnIconList: localData.iconB64,
+    ccbysaLogo: localData.ccbysaLogoB64,
     tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
     msgBoxTitleList: ["const that = this;", "配线图版本切换", "PDF文件下载", "配线图说明", "临时通知标题"],
+    msgBox3DescList: [
+      "本图由互联网公开资料结合作者乘车经历整理推测而成，不保证图上内容的真实性和准确性.",
+      "本图仅表示线路和车站之间的逻辑关系，并非按真实比例绘制，不应被作为规划出行的依据.",
+      "本图标注的各类信息为作者根据互联网公开资料做出的推测，请以相关单位发布的信息为准.",
+      "本图中标注的站间距均为估计值，仅供参考，可能与设计值或运营单位公布的数值存在差异.",
+      "本图仅供学习研究使用，请合理合规使用本图，恕不承担用户违规使用本图造成的一切后果.",
+    ],
 
     // Init Value
     devInfo: {
@@ -54,7 +62,7 @@ Page({
     },
 
     // Settings
-    menuCurr: 4,
+    menuCurr: 3,
     isDev: false,
     allowDownload: false,
     msgBox2btnTxt: "加载中",

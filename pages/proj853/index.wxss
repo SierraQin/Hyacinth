@@ -100,7 +100,10 @@
 }
 
 .msgScroll {
-  height: 500rpx;
+  height: 600rpx;
+  padding: 20rpx;
+  background-color: #d9e1ec;
+  border-radius: 5rpx;
 }
 
 .msgText {
@@ -147,4 +150,30 @@
   font-size: 42rpx;
   font-weight: bold;
   text-align: left;
+}
+
+.msgSubBlock {
+  margin: 30rpx 0 70rpx
+}
+
+.msgSubTitle {
+  margin-bottom: 25rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.msgInput {
+  margin: 10rpx 0;
+  height: 50rpx;
+  border: 2rpx solid #003380;
+  border-radius: 5rpx;
+  background-color: #6685b3;
+  color: white;
+}
+
+#ccbysaLogo {
+  margin: 30rpx auto 0;
+  width: 240rpx;
+  height: 84rpx;
 }

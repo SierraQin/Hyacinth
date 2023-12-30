@@ -33,6 +33,7 @@
 <!-- 这里使用静态样式以便后续版面设计 -->
 <view class="msgBox" wx:if="{{menuCurr!=0}}" style="bottom: {{msgBoxBottom}}px; height: 800rpx;">
   <view class="msgTitle">{{msgBoxTitleList[menuCurr]}}</view>
+
   <view wx:if="{{menuCurr==1}}">
     <view class="msgMiniCard {{isDev?'msg_inactive':'msg_active'}}" bind:tap="switch2Prod">
       <view class="msgMiniTitle">{{isDev?"正式版":"正式版 (当前)"}}</view>
@@ -45,6 +46,7 @@
       <text class="msgText">{{"正在进行绘制的半成品。\n开发版属于过程性版本，可能与后续版本内容和样式存在较大的差异。"}}</text>
     </view>
   </view>
+
   <view wx:if="{{menuCurr==2}}">
     <!-- <view bind:tap="downloadPdf">临时: {{msgBox2btnTxt}}</view> -->
     <text class="msgText bold" style="margin-top: 30rpx; margin-bottom: 10rpx;">{{"当前版本: "+(isDev?"开发版":"正式版")+"\n当前文件: "+(isDev?("dev-"+devInfo.shaShort):("MTR"+prodInfo.ver))+".pdf"}}</text>
@@ -52,7 +54,24 @@
     <view class="msgBtn {{allowDownload?'msg_active':'msg_inactive'}}" id="msgBtn_2" bind:tap="downloadPdf">{{msgBox2btnTxt}}</view>
     <text class="msgText" style="margin-top: 30rpx;">{{"此外，您也可以访问项目主页，以通过百度网盘等其他多种其他方式，手动下载指定版本的PDF文件。"}}</text>
   </view>
-  <view wx:if="{{menuCurr==3}}"></view>
+
+  <scroll-view class="msgScroll" scroll-y type="list" wx:if="{{menuCurr==3}}">
+    <view class="msgSubBlock">
+      <view class="msgSubTitle">项目主页</view>
+      <text class="msgText">{{"提供北京市轨道交通线路配置图的完整说明、历史修改记录、使用指南、PDF文件下载、完整源文件等内容。"}}</text>
+      <text class="msgText bold">{{"可复制链接到浏览器访问: "}}</text>
+      <input class="msgInput" value="https://github.com/SierraQin/metro"></input>
+      <text class="msgText">{{"如您的网络环境无法正常访问，请稍等片刻后，再刷新重试。"}}</text>
+    </view>
+    <view class="msgSubBlock">
+      <view class="msgSubTitle">北京市轨道交通线路配置图</view>
+      <!-- <view class="msgSubTitle"><text>{{"北京市轨道交通\n线路配置图"}}</text></view> -->
+      <text class="msgText bold">{{"[作者] SierraQin及其他贡献者\n[版本] "+prodInfo.ver+"\n[日期] "+prodInfo.date}}</text>
+      <text class="msgText" space="ensp" wx:for="{{msgBox3DescList}}">{{index+1+". "+item}}</text>
+      <image id="ccbysaLogo" src="{{ccbysaLogo}}"></image>
+    </view>
+  </scroll-view>
+
   <scroll-view class="msgScroll" type="list" wx:if="{{menuCurr==4}}">
     <text class="msgText">{{"这是临时通知，具体内容从后端api或静态json配置文件现场拉取\n需要调整样式，需要增加定时关闭，需要改为列表渲染\n\n\n！！！ 点击空白区域关闭 ！！！"}}</text>
   </scroll-view>
