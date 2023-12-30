@@ -62,7 +62,7 @@ Page({
     },
 
     // Settings
-    menuCurr: 4,
+    menuCurr: 0,
     isDev: false,
     allowDownload: false,
     msgBox2btnTxt: "加载中",

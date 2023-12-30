@@ -69,6 +69,16 @@ Page({
     });
   },
 
+  onShareAppMessage() {
+    let title = "欢迎使用 列车运行前方";
+    let path = "/pages/index/index";
+    let imageUrl = "";
+    return {
+      title,
+      path
+    };
+  },
+
   check853Compatibility() {
     let c = {
       platform: {
