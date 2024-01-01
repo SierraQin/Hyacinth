@@ -141,8 +141,8 @@ Page({
   onShareAppMessage() {
     // 为了避免捕捉返回事件带来的复杂逻辑，后续计划所有分享页面均以传参的方式通过 /pages/index/index 页面进行跳转
 
-    let title = `北京地铁路网配线图 ${this.isDev?"开发版":this.prodInfo.ver}`;
-    let path = `/pages/proj853/index${this.isDev?"?dev":""}`;
+    let title = `北京地铁路网配线图 ${this.data.isDev?"开发版":this.data.prodInfo.ver}`;
+    let path = `/pages/proj853/index${this.data.isDev?"?dev":""}`;
     // 分享头图还没做好
     let imageUrl = "";
     return {
