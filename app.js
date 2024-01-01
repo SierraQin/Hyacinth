@@ -11,8 +11,10 @@ App({
         var cap = wx.getMenuButtonBoundingClientRect();
         if (cap) {
           that.globalData.capsuleHeight = cap.bottom;
+          that.globalData.capsuleTop = cap.top;
         } else {
-          that.globalData.capsuleHeight = res.statusBarHeight + 50
+          that.globalData.capsuleHeight = res.statusBarHeight + 50;
+          that.globalData.capsuleTop = res.statusBarHeight + 10;
         }
       }
     });

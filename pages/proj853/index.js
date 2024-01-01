@@ -37,6 +37,7 @@ Page({
     svgProd: urlList.svgProd,
     svgDev: urlList.svgDev,
     tabBtnIconList: localData.iconB64,
+    navBackIcon: localData.navBackIconB64,
     ccbysaLogo: localData.ccbysaLogoB64,
     tabBtnTxtList: ["重置缩放", "版本切换", "文件下载", "项目说明"],
     msgBoxTitleList: ["const that = this;", "配线图版本切换", "PDF文件下载", "配线图说明", "临时通知标题"],
@@ -69,6 +70,7 @@ Page({
 
     // Layout
     infoPos: app.globalData.capsuleHeight,
+    navbackPos: app.globalData.capsuleTop,
     msgBoxPos: app.globalData.systemInfo.windowHeight * 0.3,
     msgBoxBottom: 120,
     msgBoxHeight: 100,
@@ -150,6 +152,16 @@ Page({
       //imageUrl
       path
     };
+  },
+
+  navBackHandler(evt) {
+    wx.navigateBack({
+      fail: () => {
+        wx.navigateTo({
+          url: "/pages/index/index",
+        });
+      }
+    });
   },
 
   tabBtnHandler(evt) {

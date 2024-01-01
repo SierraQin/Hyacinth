@@ -177,3 +177,24 @@
   width: 240rpx;
   height: 84rpx;
 }
+
+.navBack {
+  position: fixed;
+  /* display: block; */
+  z-index: 99600;
+  text-align: center;
+  top: 100rpx;
+  left: 30rpx;
+  bottom: env(safe-area-inset-bottom);
+  width: 80rpx;
+  height: 80rpx;
+  border: 5rpx solid #003380;
+  border-radius: 10rpx;
+  background-color: white;
+}
+
+#navBackImg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

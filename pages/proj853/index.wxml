@@ -83,3 +83,7 @@
     <view class="tabBtnText">{{tabBtnTxtList[index]}}</view>
   </view>
 </view>
+
+<view class="navBack" style="top: {{navbackPos}}px;" bind:tap="navBackHandler">
+  <image id="navBackImg" src="{{navBackIcon}}" mode="aspectFit" />
+</view>
