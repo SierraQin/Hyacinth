@@ -54,7 +54,7 @@ page {
 }
 
 .x-block {
-  margin: var(--td-spacer-4, 64rpx) 0 0;
+  margin: var(--td-spacer-4, 96rpx) 0 0;
 }
 
 .x-block_notitle {

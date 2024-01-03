@@ -10,8 +10,20 @@
 
   <view class="x-block">
     <view class="x-block-header">
-      <view class="x-block-header-title"></view>
-      <view class="x-block-header-desc"></view>
+      <view class="x-block-header-title">Debug信息</view>
+      <view class="x-block-header-desc">您可以在反馈问题时，选择将下面的一些信息在问卷中提供给作者，以便更快对问题进行排查和修复。</view>
+    </view>
+    <view class="x-block-block">
+      <t-checkbox-group value="{{debugInfoCurr}}" options="{{debugInfoCheckbox}}" bind:change="debugInfoCheckboxHandler" />
+    </view>
+  </view>
+
+  <view class="x-block_notitle x-block_notitle">
+    <view class="x-block-header">
+      <view class="x-block-header-desc x-block-desconly">作者尊重用户的隐私。您可以选择在反馈问题时<text class="bold">主动</text>将这些信息提供给作者，除此之外，本小程序不会在任何情况下收集或处理您的个人信息。</view>
+    </view>
+    <view class="x-block-block">
+      <t-textarea label="您可长按复制并粘贴到问卷中" disableDefaultPadding="{{true}}" autosize="{{true}}" value="{{debugInfoText}}" />
     </view>
   </view>
 
@@ -19,7 +31,7 @@
   <view class="x-block">
     <view class="x-block-header">
       <view class="x-block-header-title">开放源代码许可</view>
-      <view class="x-block-header-desc">本项目</view>
+      <view class="x-block-header-desc">本项目：</view>
     </view>
     <view class="x-block-block">
       <t-collapse>
@@ -36,7 +48,7 @@
 
   <view class="x-block_notitle x-block_notitle">
     <view class="x-block-header">
-      <view class="x-block-header-desc x-block-desconly">本项目使用的库</view>
+      <view class="x-block-header-desc x-block-desconly">本项目使用的库：</view>
     </view>
     <view class="x-block-block">
       <t-collapse>
