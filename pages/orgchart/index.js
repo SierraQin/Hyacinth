@@ -132,7 +132,6 @@ Page({
       d.lines[value].id = lineCurr;
       d.lines[value].staLen = d.lines[value].sta.length;
       d.lines[value].tier3Len = Object.keys(d.lines[value].tier3).length;
-      console.log(t2Key)
       d.lines[value].type != 1 ? d.lines[value].t2 = d.tier2[t2Key] : NaN;
       d.lines[value].type != 1 ? d.lines[value].t2.t2Key = t2Key : NaN;
 

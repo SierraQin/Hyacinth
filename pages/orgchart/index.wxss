@@ -11,6 +11,10 @@
   --td-side-bar-border-radius: 0;
 }
 
+.t-side-bar-item__line {
+  --td-side-bar-active-color: white;
+}
+
 .tab-block {
   height: 100%;
   background-color: white;
