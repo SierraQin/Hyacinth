@@ -1,0 +1,36 @@
+<!-- pages/orgchart/index.wxml -->
+
+<view>
+  <t-navbar title="站区一览表" left-arrow bind:go-back="navBackHandler"></t-navbar>
+
+  <t-tabs defaultValue="{{tabCurr}}" bind:change="onTabsChange">
+    <t-tab-panel wx:for="{{tabList}}" label="{{item}}" value="{{index}}" />
+  </t-tabs>
+
+  <view id="tabPanel" class="tab-block" style="height: {{tabBlockHeight}}px;">
+    <t-side-bar class="sidebar" value="{{tab0_sideBarCurr}}" bind:change="onTab0SideBarChange">
+      <t-side-bar-item wx:for="{{lineIdList_byLine}}" value="{{index}}" label="{{lineDic[item].name}}" style="background-color: {{lineDic[item].hex}}; color: {{lineDic[item].dark?'black':'white'}};" />
+    </t-side-bar>
+
+    <scroll-view class="sidebar-content" scroll-y scroll-with-animation scroll-top="{{tab0_scrollTop}}" style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px" bind:scroll="onTab0Scroll">
+      <view wx:for="{{lineIdList_byLine}}">
+        <view class="tab0-anchor">{{lineDic[item].name}}</view>
+        <view>
+          <view class="tab0-titleTop" style="width:{{titleWidth}}px;background-color:{{lineDic[item].hex}};color:{{lineDic[item].dark?'black':'white'}};"></view>
+          <view class="tab0-title" style="width:{{titleWidth}}px;background-color:{{lineDic[item].hex}};color:{{lineDic[item].dark?'black':'white'}};">{{lineDic[item].name}}</view>
+          <view class="tab0-desc" style="width:{{titleWidth}}px;background-color:{{lineDic[item].hex}};color:{{lineDic[item].dark?'black':'white'}};"><text>{{lineDic[item].t2.name}}</text></view>
+        </view>
+        <view class="tab0-tableMain">
+          <view class="column-sta">
+            <view class="cell-sta" wx:for="{{lineDic[item].sta}}" wx:for-item="sta" style="height:{{rowHeight}}px;line-height:{{rowHeight}}px;background-color:{{lineDic[item].hex}};color:{{lineDic[item].dark?'black':'white'}};">{{sta.name}}</view>
+          </view>
+          <view class="column-tier3">
+            <view class="cell-tier3" wx:for="{{lineDic[item].staT3List}}" wx:for-item="staT3" style="height:{{rowHeight*staT3.staLen}}px;line-height:{{rowHeight*staT3.staLen}}px;background-color:{{staT3.hex}};color:{{staT3.dark?'black':'white'}};">{{staT3.name}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+</view>
+<!-- <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer> -->

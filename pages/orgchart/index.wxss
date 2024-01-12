@@ -1,0 +1,92 @@
+/* pages/orgchart/index.wxss */
+
+.t-side-bar {
+  --td-side-bar-width: 220rpx;
+}
+
+.t-side-bar-item {
+  --td-side-bar-font-size: 24rpx;
+  --td-side-bar-item-line-height: 32rpx;
+  --td-side-bar-item-height: 72rpx;
+  --td-side-bar-border-radius: 0;
+}
+
+.tab-block {
+  height: 100%;
+  background-color: white;
+  overflow: hidden;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content {
+  display: block;
+  position: fixed;
+  max-width: 500rpx;
+  top: 0%;
+  left: 220rpx;
+  padding: 0 17rpx 0 23rpx;
+}
+
+.tab0-anchor {
+  opacity: 0;
+  color: white;
+  font-size: 10rpx;
+}
+
+.tab0-titleTop {
+  height: 30rpx;
+}
+
+.tab0-title {
+  height: 80rpx;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.tab0-desc {
+  height: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+/* rpx转px在渲染时会被四舍五入产生误差 */
+
+.column-sta {
+  margin-bottom: 48rpx;
+  vertical-align: top;
+  display: inline-block;
+  width: 180rpx;
+  outline: 2px solid white;
+}
+
+.column-tier3 {
+  margin-bottom: 48rpx;
+  vertical-align: top;
+  display: inline-block;
+  width: 300rpx;
+  outline: 2px solid white;
+}
+
+.cell-sta {
+  width: 180rpx;
+  vertical-align: middle;
+  text-align: center;
+  background-color: white;
+  font-size: 26rpx;
+  outline: 1px solid white;
+}
+
+.cell-tier3 {
+  width: 300rpx;
+  vertical-align: middle;
+  text-align: center;
+  background-color: white;
+  font-size: 26rpx;
+  outline: 1px solid white;
+}
