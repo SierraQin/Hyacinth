@@ -9,6 +9,7 @@ const app = getApp();
 
 var tier2Data = {};
 var prevScrollTop = 0;
+var scrollSourseFlag = false;
 
 Page({
   data: {
@@ -178,6 +179,7 @@ Page({
 
   onTab0SideBarChange(evt) {
     let id = parseInt(evt.detail.value);
+    scrollSourseFlag = true;
 
     this.setData({
       tab0_sideBarCurr: id,
@@ -186,6 +188,10 @@ Page({
   },
 
   onTab0Scroll(evt) {
+    if (scrollSourseFlag) {
+      scrollSourseFlag = false;
+      return;
+    }
     prevScrollTop = evt.detail.scrollTop;
     if (prevScrollTop < 0) {
       this.setData({
