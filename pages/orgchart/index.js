@@ -8,6 +8,7 @@ import {
 const app = getApp();
 
 var tier2Data = {};
+var prevScrollTop = 0;
 
 Page({
   data: {
@@ -165,6 +166,16 @@ Page({
     }).exec();
   },
 
+  onTabsChange(evt) {
+    this.setData({
+      tabCurr: evt.detail.value
+    }, () => {
+      this.setData({
+        tab0_scrollTop: prevScrollTop
+      });
+    });
+  },
+
   onTab0SideBarChange(evt) {
     let id = parseInt(evt.detail.value);
 
@@ -175,16 +186,16 @@ Page({
   },
 
   onTab0Scroll(evt) {
-    let st = evt.detail.scrollTop;
-    if (st < 0) {
+    prevScrollTop = evt.detail.scrollTop;
+    if (prevScrollTop < 0) {
       this.setData({
         tab0_sideBarCurr: 0
       });
       return;
     }
 
-    let offset = app.globalData.systemInfo.screenWidth / 750 * 50;
-    let tab0_sideBarCurr = this.data.tab0_offsetList.findLastIndex((value, index, array) => st > value - offset);
+    let offset = app.globalData.systemInfo.screenWidth / 750 * 25;
+    let tab0_sideBarCurr = this.data.tab0_offsetList.findLastIndex((value, index, array) => prevScrollTop > value - offset);
     if (tab0_sideBarCurr >= 0) {
       this.setData({
         tab0_sideBarCurr

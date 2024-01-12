@@ -7,7 +7,7 @@
     <t-tab-panel wx:for="{{tabList}}" label="{{item}}" value="{{index}}" />
   </t-tabs>
 
-  <view id="tabPanel" class="tab-block" style="height: {{tabBlockHeight}}px;">
+  <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==0}}" style="height: {{tabBlockHeight}}px;">
     <t-side-bar class="sidebar" value="{{tab0_sideBarCurr}}" bind:change="onTab0SideBarChange">
       <t-side-bar-item wx:for="{{lineIdList_byLine}}" value="{{index}}" label="{{lineDic[item].name}}" style="background-color: {{lineDic[item].hex}}; color: {{lineDic[item].dark?'black':'white'}};" />
     </t-side-bar>
