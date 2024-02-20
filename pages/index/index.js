@@ -10,14 +10,14 @@ const app = getApp();
 
 Page({
   data: {
-    //cardList: [true, false, false, false, false],
-    cardList: [true, true, false, true, true, true, false, false, false],
+    //cardList: [true, true, true, true, true, true, true, true, true],
+    cardList: [true, true, true, true, true, true, false, false, false],
     cardBgList: localData.cardBgB64,
-    cardTitleList: ["路网配线图", "路网配线图(旧)", "占位", "站区一览表", "问题反馈", "关于...", "占位", "占位", "占位"],
+    cardTitleList: ["路网配线图", "路网配线图(旧)", "计价路由", "站区一览表", "问题反馈", "关于...", "占位", "占位", "占位"],
     cardTextList: [
       "基于Skyline渲染引擎彻底进行重构，显著降低掉帧卡顿",
       "旧版小程序，专为PC端及较老版本微信保留",
-      "（占位）",
+      "推测ACC计算票价时所选用的最短里程路径",
       "运营公司下辖各站区管界查询",
       "帮助作者创造更好的用户体验",
       "关于列车运行前方小程序",
@@ -28,18 +28,18 @@ Page({
     cardIconList: [
       "map-collection",
       "map-cancel",
-      "indicator",
+      "subway-line",
       "user-unknown",
       "bug",
       "info-circle",
+      "indicator",
       "chart-line",
-      "subway-line",
       "tools"
     ],
     cardUrlList: [
       "/pages/proj853/index",
       "/pages/proj853/legacy/index",
-      "",
+      "/pages/farecalc/index",
       "/pages/orgchart/index",
       "",
       "/pages/about/index",

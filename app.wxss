@@ -60,6 +60,11 @@ page {
   color: var(--td-font-gray-1, rgba(0, 0, 0, 0.9));
   margin: 16rpx 32rpx 0;
   line-height: 44rpx;
+  text-align: justify;
+}
+
+.x-text-for{
+  display: block;
 }
 
 .x-block {

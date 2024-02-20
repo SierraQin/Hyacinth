@@ -1,0 +1,90 @@
+/* pages/farecalc/index.wxss */
+
+.main {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.route-container {
+  width: 710rpx;
+  margin: 0 auto;
+}
+
+.route-tips {
+  display: flex;
+  margin-bottom: 20rpx;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  vertical-align: middle;
+}
+
+.route-tips-icon {
+  align-self: center;
+}
+
+.route-tips-text {
+  margin-left: 25rpx;
+  font-size: 28rpx;
+}
+
+.route-sta {
+  padding: 30rpx 40rpx;
+  border-radius: 20rpx;
+  background-color: white;
+  font-size: 40rpx;
+}
+
+.route-line {
+  display: flex;
+  vertical-align: middle;
+}
+
+.route-line-icon {
+  padding: 10rpx 30rpx;
+}
+
+.route-line-desc {
+  width: 570rpx;
+  display: flex;
+  margin: auto 0;
+}
+
+.route-line-name {
+  width: 350rpx;
+}
+
+.route-line-card {
+  width: fit-content;
+  padding: 15rpx 20rpx;
+  border-radius: 10rpx;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  font-weight: bold;
+}
+
+.route-line-dis {
+  width: 220rpx;
+  margin: auto 0;
+  padding-right: 30rpx;
+  text-align: right;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+
+.route-desc {
+  display: flex;
+  margin-top: 20rpx;
+  padding: 30rpx 40rpx;
+  border-radius: 20rpx;
+  background-color: #f2f3ff;
+  vertical-align: middle;
+}
+
+.route-desc-icon {
+  align-self: center;
+}
+
+.route-desc-text {
+  margin-left: 10rpx;
+  font-size: 40rpx;
+}

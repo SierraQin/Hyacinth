@@ -1,0 +1,95 @@
+<!-- pages/about/index.wxml -->
+
+<view class="main">
+  <view class="block">
+    <t-navbar title="计价路由" left-arrow bind:go-back="navBackHandler"></t-navbar>
+  </view>
+
+  <view class="x-title">计价路由计算器</view>
+  <view class="x-desc">用于推测ACC在计算票价时所选用的最短里程路径</view>
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title">规则</view>
+      <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+    </view>
+
+    <view class="x-block-block">
+      <t-collapse>
+        <t-collapse-panel header="路径求解规则">
+          <view class="x-text">
+            <text class="x-text-for" wx:for="{{calcRules}}">{{index+1+". "+item+"."}}</text>
+          </view>
+        </t-collapse-panel>
+      </t-collapse>
+    </view>
+  </view>
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title">路径</view>
+      <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+    </view>
+
+    <view class="x-block-block">
+      <t-cell id="cell_0" title="起点站" note="{{cas_note[0]}}" bind:click="showCascader" arrow />
+      <t-cascader id="cas_0" visible="{{cas_visible[0]}}" options="{{cas_options}}" value="{{cas_curr[0]}}" title="选择起点站" sub-titles="{{cas_subTitles}}" bind:change="onCascaderChange"></t-cascader>
+      <t-cell id="cell_1" title="终点站" note="{{cas_note[1]}}" bind:click="showCascader" arrow />
+      <t-cascader id="cas_1" visible="{{cas_visible[1]}}" options="{{cas_options}}" value="{{cas_curr[1]}}" title="选择终点站" sub-titles="{{cas_subTitles}}" bind:change="onCascaderChange"></t-cascader>
+    </view>
+  </view>
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title">计算结果</view>
+      <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+    </view>
+
+    <view class="x-block-block">
+      <view class="route-container" wx:if="{{route_valid}}">
+        <view class="route-tips" style="background-color: #fff1e9;">
+          <t-icon class="route-tips-icon" name="info-circle" size="60rpx" />
+          <view class="route-tips-text">计价里程及票价等数据均为推测值，可能与实际情况存在差异，请以ACC数据为准。</view>
+        </view>
+
+        <view class="route-sta">{{route_start}}</view>
+
+        <view wx:for="{{route_list}}">
+          <view class="route-line">
+            <view class="route-line-icon">
+              <t-icon name="expand-vertical" size="80rpx" />
+            </view>
+            <view class="route-line-desc">
+              <view class="route-line-name">
+                <view class="route-line-card" style="background-color:{{item.hex}};color:{{item.dark?'#003380':'white'}};">{{item.line}}</view>
+              </view>
+              <view class="route-line-dis">{{item.dis}} m</view>
+            </view>
+          </view>
+
+          <view class="route-sta">{{item.sta}}</view>
+
+        </view>
+
+        <view class="route-desc">
+          <t-icon class="route-desc-icon" name="map-ruler" size="50rpx" />
+          <view class="route-desc-text" style="width: 300rpx;">里程 {{route_dis}}m</view>
+          <t-icon class="route-desc-icon" name="ticket" size="50rpx" />
+          <view class="route-desc-text">票价 ￥{{route_fare}}</view>
+        </view>
+      </view>
+
+      <view class="route-container" wx:if="{{!route_valid}}">
+        <view class="route-tips" style="background-color: #fff0ed;">
+          <t-icon class="route-tips-icon" name="error-triangle" size="60rpx" />
+          <view class="route-tips-text"><text>{{"路径错误！\n请勿将起终点设置为相同车站"}}</text></view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+
+  <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+
+</view>

@@ -10,7 +10,8 @@
     "pages/about/index",
     "pages/orgchart/index",
     "pages/proj853/index",
-    "pages/proj853/legacy/index"
+    "pages/proj853/legacy/index",
+    "pages/farecalc/index"
   ],
   "renderer": "webview",
   "rendererOptions": {
