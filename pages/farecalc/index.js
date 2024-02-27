@@ -51,8 +51,7 @@ Page({
 
   onLoad() {
 
-    // 这里打算从后端拉取配置文件, 但现在暂时先用本地数据代替
-
+    // 这里纠结一下要不要从后端拉取配置文件
     let calcRules = [];
     fareVars.rules.forEach((rulz) => {
       calcRules.push(rulz.replace("%FREE_DIS%", +this.data.freeDis.toString()));

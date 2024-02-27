@@ -54,7 +54,9 @@ Page({
       name: "Tencent/tdesign-miniprogram",
       usedBy: [
         "pages/about/index",
+        "pages/farecalc/index",
         "pages/index/index",
+        //"pages/orgchart/index",
       ],
       license: localData.licenseText["tdesign-miniprogram"]
     }, {

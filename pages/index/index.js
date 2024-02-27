@@ -11,7 +11,7 @@ const app = getApp();
 Page({
   data: {
     //cardList: [true, true, true, true, true, true, true, true, true],
-    cardList: [true, true, true, true, true, true, false, false, false],
+    cardList: [true, true, true, false, true, true, false, false, false],
     cardBgList: localData.cardBgB64,
     cardTitleList: ["路网配线图", "路网配线图(旧)", "计价路由", "站区一览表", "问题反馈", "关于...", "占位", "占位", "占位"],
     cardTextList: [
