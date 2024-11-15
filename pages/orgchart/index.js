@@ -1,13 +1,9 @@
 // pages/orgchart/index.js
 
-
-import {
-  localData
-} from "./localData.js";
-
 const app = getApp();
 
-var tier2Data = {};
+var rawData = NaN;
+
 var prevScrollTop = 0;
 var scrollSourseFlag = false;
 
@@ -20,11 +16,9 @@ Page({
 
     tier2Data: {},
     lineDic: [],
-    lineIdList_byLine: [],
-    lineIdList_byTier3: [],
 
     tabCurr: 0,
-    tabList: ["线路", "站区", "搜索"],
+    tabList: ["线路", "站区", "说明"],
 
     tab0_sideBarCurr: 0,
     tab0_offsetList: [],
@@ -32,12 +26,46 @@ Page({
   },
 
   onLoad() {
-    this.preparData();
+    const that = this;
+
+
+
+
+    wx.showLoading({
+      title: "更新数据中",
+      mask: true
+    })
+    wx.request({
+      url: "https://static.qinxr.cn/Hyacinth/orgchart.json",
+      timeout: 15000,
+      dataType: "json",
+      success: (res) => {
+        rawData = res.data;
+        that.preparData_v2();
+      },
+      fail: (res) => {
+        wx.hideLoading();
+      }
+    })
+
+
+
 
   },
 
   onReady() {
-
+    const that = this;
+    const sq = wx.createSelectorQuery();
+    sq.select("#tabPanel").boundingClientRect();
+    sq.selectViewport().scrollOffset();
+    sq.exec((res) => {
+      let tabBlockHeight = app.globalData.systemInfo.screenHeight - res[0].top - 20 / 750 * app.globalData.systemInfo.screenWidth - 10;
+      let tabBlockTop = res[0].top;
+      that.setData({
+        tabBlockHeight,
+        tabBlockTop
+      }, () => {});
+    });
   },
 
   setLayoutVars() {
@@ -51,7 +79,7 @@ Page({
     sq.select("#tabPanel").boundingClientRect();
     sq.selectViewport().scrollOffset();
     sq.exec((res) => {
-      let tabBlockHeight = app.globalData.systemInfo.screenHeight - res[0].top - 20 / 750 * app.globalData.systemInfo.screenWidth;
+      let tabBlockHeight = app.globalData.systemInfo.screenHeight - res[0].top - 20 / 750 * app.globalData.systemInfo.screenWidth - 10;
       let tabBlockTop = res[0].top;
       that.setData({
         tabBlockHeight,
@@ -64,95 +92,74 @@ Page({
     });
   },
 
-  preparData() {
-    let d = localData.tier2Data;
-    let lineIdList_byLine = [];
-    let lineIdList_byTier3 = [];
 
-    Object.keys(d.lines).forEach((value, index, array) => {
-      let lineCurr = parseInt(value);
+  preparData_v2() {
+    let raw = rawData.t2Dic;
+
+    let renderingListTemp = [];
+    let renderingList = [];
+    let lineDic = {};
+
+
+    Object.keys(raw).forEach((value, index, array) => {
+      Object.keys(raw[value].lines).forEach((v, i, a) => {
+        raw[value].lines[v].t2 = value;
+        raw[value].lines[v].t2Name = raw[value].name;
+        lineDic[v] = raw[value].lines[v];
+        if (!raw[value].lines[v].hidden) {
+          renderingListTemp.push({
+            idx: raw[value].lines[v].idx,
+            tagName: v
+          });
+        }
+      });
+    });
+
+
+    renderingListTemp.sort((a, b) => a.idx - b.idx);
+    renderingListTemp.forEach((value, index, array) => {
+      renderingList.push(value.tagName);
+    });
+
+    // 计算站区管界内连续的车站以便显示
+    Object.keys(lineDic).forEach((value, index, array) => {
       let lineT3List = [];
       let lineT3Curr = NaN;
-      let lineT3Prev = "";
+      let lineT3Prev = NaN;
 
-      d.lines[value].sta.forEach((v, i, a) => {
-        // 计算站区管界内连续的车站以便显示
-        let curr = v.status == 1 ? v.status.toString() : v.status + v.t3;
-        if (lineT3Prev == curr) {
-          lineT3List[lineT3List.length - 1].staLen += 1;
+      lineDic[value].sta.forEach((v, i, a) => {
+        if (v[2] == lineT3Prev) {
+          lineT3Curr.staLen += 1;
         } else {
-          if (v.status == 0) {
-            lineT3Curr = {
-              t3Key: v.t3,
-              lineKey: v.up.toString(),
-              staLen: 1,
-              name: d.lines[v.up.toString()].tier3[v.t3].name + d.lines[v.up.toString()].tier3[v.t3].suffix,
-              hex: d.lines[v.up.toString()].hex,
-              dark: d.lines[v.up.toString()].dark
-            };
-          } else {
-            lineT3Curr = {
-              t3Key: -1,
-              lineKey: "-1",
-              staLen: 1,
-              name: "非运营",
-              hex: "#808080",
-              dark: false
-            };
+          if (lineT3Curr != NaN) {
+            lineT3List.push(lineT3Curr);
           }
-          lineT3List.push(lineT3Curr);
+          lineT3Curr = {
+            line: v[3],
+            hex: lineDic[v[3]].hex,
+            dark: lineDic[v[3]].dark,
+            name: v[2],
+            staLen: 1,
+            t2: lineDic[v[3]].t2,
+          }
         }
-        lineT3Prev = curr;
-
-        // 通过处理换乘站相互管辖问题来计算站区管界
-        if (v.up == lineCurr) {
-          d.lines[value].sta[i].dn.push(lineCurr);
-        } else if (v.up > 0) {
-          d.lines[v.up.toString()].sta.forEach((tv, ti, ta) => {
-            if (tv.name == v.name) {
-              tv.dn.push(lineCurr);
-            }
-          });
-        } else {
-          return;
-        }
-
-        let s = {
-          name: v.name,
-          id: i
-        };
-        if (d.lines[v.up.toString()].tier3[v.t3]["lines"][value]) {
-          d.lines[v.up.toString()].tier3[v.t3]["lines"][value].push(s);
-        } else {
-          d.lines[v.up.toString()].tier3[v.t3]["lines"][value] = [s];
-        }
-
+        lineT3Prev = v[2];
       });
+      lineT3List.push(lineT3Curr);
+      lineT3List.shift();
 
-      let t2Key = typeof (d.lines[value].t2) == "string" ? d.lines[value].t2 : d.lines[value].t2.t2Key;
-      d.lines[value].id = lineCurr;
-      d.lines[value].staLen = d.lines[value].sta.length;
-      d.lines[value].tier3Len = Object.keys(d.lines[value].tier3).length;
-      d.lines[value].type != 1 ? d.lines[value].t2 = d.tier2[t2Key] : NaN;
-      d.lines[value].type != 1 ? d.lines[value].t2.t2Key = t2Key : NaN;
-
-      d.lines[value].type == 0 ? d.lines[value].staT3List = lineT3List : NaN;
-      d.lines[value].type == 0 ? lineIdList_byLine.push(value) : NaN;
-      d.lines[value].type != 1 ? lineIdList_byTier3.push(value) : NaN;
+      lineDic[value].tab0_t3List = lineT3List;
     });
 
-    tier2Data = d;
+
+
     this.setData({
-      tier2Data,
-      //tier2Dic: tier2Data.tier2,
-      lineDic: d.lines,
-      lineIdList_byLine,
-      lineIdList_byTier3
+      lineDic,
+      renderingList
     }, () => {
       this.setLayoutVars();
+      wx.hideLoading();
     });
-
-    console.log(this.data);
   },
 
   setScrollOffset() {
