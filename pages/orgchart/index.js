@@ -1,5 +1,9 @@
 // pages/orgchart/index.js
 
+import Toast, {
+  hideToast
+} from 'tdesign-miniprogram/toast/index';
+
 const app = getApp();
 
 var rawData = NaN;
@@ -19,6 +23,12 @@ Page({
 
     tabCurr: 0,
     tabList: ["线路", "站区", "说明"],
+    dialogConfirmBtn: {
+      content: "返回",
+      variant: "base"
+    },
+
+    showDialog: false,
 
     tab0_sideBarCurr: 0,
     tab0_offsetList: [],
@@ -28,13 +38,16 @@ Page({
   onLoad() {
     const that = this;
 
+    Toast({
+      context: this,
+      selector: '#toast-loading',
+      duration: -1,
+      message: '同步数据中...',
+      theme: 'loading',
+      direction: 'column',
+      preventScrollThrough: true,
+    });
 
-
-
-    wx.showLoading({
-      title: "更新数据中",
-      mask: true
-    })
     wx.request({
       url: "https://static.qinxr.cn/Hyacinth/orgchart.json",
       timeout: 15000,
@@ -44,7 +57,13 @@ Page({
         that.preparData_v2();
       },
       fail: (res) => {
-        wx.hideLoading();
+        hideToast({
+          context: this,
+          selector: '#toast-loading',
+        });
+        that.setData({
+          showDialog: true,
+        });
       }
     })
 
@@ -158,7 +177,10 @@ Page({
       renderingList
     }, () => {
       this.setLayoutVars();
-      wx.hideLoading();
+      hideToast({
+        context: this,
+        selector: '#toast-loading',
+      });
     });
   },
 
