@@ -18,8 +18,10 @@ Page({
     titleWidth: 200,
     tabBlockTop: 200,
 
-    tier2Data: {},
-    lineDic: [],
+    tier3List: [],
+    tier3Dic: {},
+    lineList: [],
+    lineDic: {},
 
     tabCurr: 0,
     tabList: ["线路", "站区", "说明"],
@@ -32,7 +34,9 @@ Page({
 
     tab0_sideBarCurr: 0,
     tab0_offsetList: [],
-    tab0_scrollTop: 0
+    tab0_titleOffset: 0,
+    tab0_scrollTop: 0,
+
   },
 
   onLoad() {
@@ -115,8 +119,8 @@ Page({
   preparData_v2() {
     let raw = rawData.t2Dic;
 
-    let renderingListTemp = [];
-    let renderingList = [];
+    let lineListTemp = [];
+    let lineList = [];
     let lineDic = {};
 
 
@@ -126,7 +130,7 @@ Page({
         raw[value].lines[v].t2Name = raw[value].name;
         lineDic[v] = raw[value].lines[v];
         if (!raw[value].lines[v].hidden) {
-          renderingListTemp.push({
+          lineListTemp.push({
             idx: raw[value].lines[v].idx,
             tagName: v
           });
@@ -135,9 +139,9 @@ Page({
     });
 
 
-    renderingListTemp.sort((a, b) => a.idx - b.idx);
-    renderingListTemp.forEach((value, index, array) => {
-      renderingList.push(value.tagName);
+    lineListTemp.sort((a, b) => a.idx - b.idx);
+    lineListTemp.forEach((value, index, array) => {
+      lineList.push(value.tagName);
     });
 
     // 计算站区管界内连续的车站以便显示
@@ -171,10 +175,17 @@ Page({
     });
 
 
+    let tier3List = [];
+    let tier3Dic = {};
+
+    
+
+
+
 
     this.setData({
       lineDic,
-      renderingList
+      lineList
     }, () => {
       this.setLayoutVars();
       hideToast({
@@ -182,6 +193,7 @@ Page({
         selector: '#toast-loading',
       });
     });
+
   },
 
   setScrollOffset() {
@@ -192,6 +204,13 @@ Page({
       let tab0_offsetList = res.map((r) => r.top - o);
       that.setData({
         tab0_offsetList
+      });
+    }).exec();
+
+    wx.createSelectorQuery().select("#tab0-title").boundingClientRect((res) => {
+      let tab0_titleOffset = res.height + app.globalData.systemInfo.screenWidth * 0.06;
+      that.setData({
+        tab0_titleOffset
       });
     }).exec();
   },
@@ -212,7 +231,7 @@ Page({
 
     this.setData({
       tab0_sideBarCurr: id,
-      tab0_scrollTop: this.data.tab0_offsetList[id]
+      tab0_scrollTop: this.data.tab0_offsetList[id] + this.data.tab0_titleOffset
     });
   },
 
