@@ -17,7 +17,8 @@
 
 .tab-block {
   height: 100%;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #f6f6f6;
   overflow: hidden;
 }
 

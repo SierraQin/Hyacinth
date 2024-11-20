@@ -18,13 +18,13 @@ Page({
     titleWidth: 200,
     tabBlockTop: 200,
 
-    tier3List: [],
-    tier3Dic: {},
+    tier2List: [],
+    tier2Dic: {},
     lineList: [],
     lineDic: {},
 
     tabCurr: 0,
-    tabList: ["线路", "站区", "说明"],
+    tabList: ["线路", "机构", "说明"],
     dialogConfirmBtn: {
       content: "返回",
       variant: "base"
@@ -175,17 +175,52 @@ Page({
     });
 
 
-    let tier3List = [];
-    let tier3Dic = {};
+    let tier2List = Object.keys(raw);
+    let tier2Dic = {};
 
-    
+    console.log(raw);
+
+    tier2List.forEach((value, index, array) => {
+      tier2Dic[value] = {
+        t3List: [],
+        suffix: raw[value].suffix,
+        name: raw[value].name,
+        aka: raw[value].aka,
+        type: raw[value].type,
+        loc: raw[value].loc,
+        lineList: [],
+        lineDic: {}
+      };
+      Object.keys(raw[value].lines).forEach((v, i, a) => {
+        raw[value].lines[v].hidden ? NaN : tier2Dic[value].lineList.push(v);
+        tier2Dic[value].lineDic[v] = {
+          key: v,
+          name: raw[value].lines[v].name,
+          hex: raw[value].lines[v].hex,
+          dark: raw[value].lines[v].dark,
+          hidden: raw[value].lines[v].hidden
+        };
+        Object.keys(raw[value].lines[v].t3Dic).forEach((t3) => {
+          let t = raw[value].lines[v].t3Dic[t3];
+          t.t2 = value;
+          t.line = v;
+          t.name = t3;
+          t.len = t.iSta.length + t.eSta.length;
+          tier2Dic[value].t3List.push(t);
+        });
+      });
+    });
+
+
 
 
 
 
     this.setData({
+      lineList,
       lineDic,
-      lineList
+      tier2List,
+      tier2Dic
     }, () => {
       this.setLayoutVars();
       hideToast({

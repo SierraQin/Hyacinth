@@ -38,9 +38,38 @@
   </view>
 
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==1}}" style="height: {{tabBlockHeight}}px;">
-    
+    <scroll-view scroll-y scroll-with-animation style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px">
+      <view class="x-title">站区一览表</view>
+      <view class="x-desc">按机构查询各站区下辖车站</view>
+
+      <view class="x-block" wx:for="{{tier2List}}" wx:for-item="t2">
+        <view class="x-block-header">
+          <view class="x-block-header-title">{{tier2Dic[t2].aka}}</view>
+          <view class="x-block-header-desc">{{tier2Dic[t2].suffix}}{{tier2Dic[t2].name}}</view>
+        </view>
+        <view class="x-block-block"></view>
+        <t-collapse>
+          <t-cell title="机构类型" hover note="{{tier2Dic[t2].type}}" />
+          <t-cell title="机关驻地" hover note="{{tier2Dic[t2].loc}}" />
+          <t-collapse-panel header="站区列表">
+            <view wx:for="{{tier2Dic[t2].t3List}}" wx:for-item="t3" wx:if="{{!tier2Dic[t2].lineDic[t3.line].hidden}}">
+              <t-cell title="{{tier2Dic[t2].lineDic[t3.line].name}} > {{t3.name}}" hover arrow>
+                <t-badge count="{{t3.len}}" slot="note" />
+              </t-cell>
+            </view>
+          </t-collapse-panel>
+        </t-collapse>
+      </view>
+
+      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+    </scroll-view>
   </view>
+
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==2}}" style="height: {{tabBlockHeight}}px;">
+    456
+  </view>
+
+  <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==3}}" style="height: {{tabBlockHeight}}px;">
     456
   </view>
 

@@ -1,10 +1,13 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
+    "t-badge": "tdesign-miniprogram/badge/badge",
+    "t-cell": "tdesign-miniprogram/cell/cell",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
     "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel",
-    "t-dialog":"tdesign-miniprogram/dialog/dialog",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-footer": "tdesign-miniprogram/footer/footer",
+    "t-input": "tdesign-miniprogram/input/input",
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
     "t-side-bar": "tdesign-miniprogram/side-bar/side-bar",
     "t-side-bar-item": "tdesign-miniprogram/side-bar-item/side-bar-item",
