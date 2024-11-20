@@ -95,3 +95,5 @@
   font-size: 26rpx;
   outline: 1px solid white;
 }
+
+.tab3-lineTag{}

@@ -11,8 +11,12 @@ var rawData = NaN;
 var prevScrollTop = 0;
 var scrollSourseFlag = false;
 
+var lineToTier2 = {};
+
 Page({
   data: {
+    rpx2px:app.globalData.rpx2px,
+
     tabBlockHeight: 200,
     rowHeight: 200,
     titleWidth: 200,
@@ -36,6 +40,11 @@ Page({
     tab0_offsetList: [],
     tab0_titleOffset: 0,
     tab0_scrollTop: 0,
+
+    tab3_t3Path: ["y3", "m2", "西直门站区"],
+    tab3_data: {},
+    tab3_navBack: 0,
+    tab3_mainBarWidth: 50,
 
   },
 
@@ -126,6 +135,8 @@ Page({
 
     Object.keys(raw).forEach((value, index, array) => {
       Object.keys(raw[value].lines).forEach((v, i, a) => {
+        lineToTier2[v] = value;
+
         raw[value].lines[v].t2 = value;
         raw[value].lines[v].t2Name = raw[value].name;
         lineDic[v] = raw[value].lines[v];
@@ -212,10 +223,6 @@ Page({
     });
 
 
-
-
-
-
     this.setData({
       lineList,
       lineDic,
@@ -248,6 +255,78 @@ Page({
         tab0_titleOffset
       });
     }).exec();
+  },
+
+
+  navToTier3(evt) {
+    const that = this;
+    let data = evt.target.dataset;
+    let raw = rawData.t2Dic;
+
+    if (raw[data.t2].lines[data.line].hidden) {
+      return;
+    }
+
+    let xt2 = raw[data.t2];
+    let xline = xt2.lines[data.line];
+    let xt3 = xline.t3Dic[data.t3];
+
+    let tab3_t3Path = [data.t2, data.line, data.t3];
+    let tab3_data = {
+      name: data.t3,
+      t2: {
+        name: xt2.name,
+        suffix: xt2.suffix
+      },
+      line: {
+        name: xline.name,
+        hex: xline.hex,
+        dark: xline.dark,
+      },
+      iStaCount: xt3.iSta.length,
+      eStaCount: xt3.eSta.length,
+      iSta: [],
+      eSta: []
+    };
+
+    xt3.iSta.forEach((value, index, array) => {
+      tab3_data.iSta.push({
+        name: value[0],
+        status: value[1]
+      });
+    });
+
+    xt3.eSta.forEach((value, index, array) => {
+      let l = raw[lineToTier2[value[2]]].lines[value[2]];
+      tab3_data.eSta.push({
+        name: value[0],
+        status: value[1],
+        line: {
+          key: value[2],
+          name: l.name,
+          hex: l.hex,
+          dark: l.dark,
+          hidden: l.hidden
+        }
+      });
+    });
+
+    that.setData({
+        tab3_navBack: this.data.tabCurr,
+        tab3_t3Path,
+        tab3_data
+      },
+      () => {
+        that.setData({
+          tabCurr: 3
+        }, () => {
+          wx.createSelectorQuery().select("#tab3_mainLineTitle").boundingClientRect((res) => {
+            that.setData({
+              tab3_mainBarWidth: res.width + 1
+            });
+          }).exec();
+        });
+      });
   },
 
   onTabsChange(evt) {
@@ -303,12 +382,25 @@ Page({
   },
 
   navBackHandler() {
-    wx.navigateBack({
-      fail: () => {
-        wx.navigateTo({
-          url: "/pages/index/index",
+    if (this.data.tabCurr == 3) {
+      this.setData({
+        tabCurr: this.data.tab3_navBack
+      }, () => {
+        this.setData({
+          tab0_scrollTop: prevScrollTop
         });
-      }
-    });
+      });
+    } else {
+      wx.navigateBack({
+        fail: () => {
+          wx.navigateTo({
+            url: "/pages/index/index",
+          });
+        }
+      });
+    }
+
   }
+
+
 })

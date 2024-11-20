@@ -8,6 +8,7 @@ App({
     wx.getSystemInfo({
       success(res) {
         that.globalData.systemInfo = res;
+        that.globalData.rpx2px = res.screenWidth / 750;
         var cap = wx.getMenuButtonBoundingClientRect();
         if (cap) {
           that.globalData.capsuleHeight = cap.bottom;

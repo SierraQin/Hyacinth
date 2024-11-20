@@ -30,7 +30,7 @@
             <view class="cell-sta" wx:for="{{lineDic[item].sta}}" wx:for-item="sta" style="height:{{rowHeight}}px;line-height:{{rowHeight}}px;background-color:{{sta[1]==0?lineDic[item].hex:'grey'}};color:{{sta[1]==0?(lineDic[item].dark?'black':'white'):'white'}};">{{sta[0]}}</view>
           </view>
           <view class="column-tier3">
-            <view class="cell-tier3" wx:for="{{lineDic[item].tab0_t3List}}" wx:for-item="staT3" style="height:{{rowHeight*staT3.staLen}}px;line-height:{{rowHeight*staT3.staLen}}px;background-color:{{staT3.hex}};color:{{staT3.dark?'black':'white'}};">{{staT3.name}}</view>
+            <view class="cell-tier3" wx:for="{{lineDic[item].tab0_t3List}}" wx:for-item="staT3" style="height:{{rowHeight*staT3.staLen}}px;line-height:{{rowHeight*staT3.staLen}}px;background-color:{{staT3.hex}};color:{{staT3.dark?'black':'white'}};" bind:tap="navToTier3" data-t2="{{staT3.t2}}" data-line="{{staT3.line}}" data-t3="{{staT3.name}}">{{staT3.name}}</view>
           </view>
         </view>
       </view>
@@ -53,7 +53,7 @@
           <t-cell title="机关驻地" hover note="{{tier2Dic[t2].loc}}" />
           <t-collapse-panel header="站区列表">
             <view wx:for="{{tier2Dic[t2].t3List}}" wx:for-item="t3" wx:if="{{!tier2Dic[t2].lineDic[t3.line].hidden}}">
-              <t-cell title="{{tier2Dic[t2].lineDic[t3.line].name}} > {{t3.name}}" hover arrow>
+              <t-cell title="{{tier2Dic[t2].lineDic[t3.line].name}} > {{t3.name}}" hover arrow bind:click="navToTier3" data-t2="{{t2}}" data-line="{{tier2Dic[t2].lineDic[t3.line].key}}" data-t3="{{t3.name}}">
                 <t-badge count="{{t3.len}}" slot="note" />
               </t-cell>
             </view>
@@ -66,11 +66,63 @@
   </view>
 
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==2}}" style="height: {{tabBlockHeight}}px;">
-    456
+    <scroll-view scroll-y scroll-with-animation style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px">
+      <view style="content: ''; overflow: hidden;">
+        <!-- https://developers.weixin.qq.com/community/develop/doc/00080cc5040580a4e629d18f45ec00 -->
+      </view>
+      <view>456 Placeholder</view>
+    </scroll-view>
+    <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
   </view>
 
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==3}}" style="height: {{tabBlockHeight}}px;">
-    456
+    <scroll-view scroll-y scroll-with-animation style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px">
+      <view style="content: ''; overflow: hidden;">
+        <!-- https://developers.weixin.qq.com/community/develop/doc/00080cc5040580a4e629d18f45ec00 -->
+      </view>
+      <view style="min-height:{{tabBlockHeight-160*rpx2px}}px;">
+        <view class="x-title">{{tab3_data.name}}</view>
+        <view class="x-desc">{{tab3_data.t2.name}}</view>
+
+        <view class="x-block">
+          <view class="x-block-header">
+            <view class="x-block-header-title">
+              <text id="tab3_mainLineTitle">{{tab3_data.line.name}}</text>
+              <view style="height: 15rpx; width: {{tab3_mainBarWidth}}px; background-color: {{tab3_data.line.hex}};"></view>
+            </view>
+            <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+          </view>
+          <view class="x-block-block">
+            <view wx:for="{{tab3_data.iSta}}">
+              <t-cell wx:if="{{item.status==0}}" title="{{item.name}}" hover />
+              <t-cell wx:else="" title="{{item.name}}" hover>
+                <t-badge count="本站停运" slot="note" />
+              </t-cell>
+            </view>
+          </view>
+        </view>
+
+        <view class="x-block" wx:if="{{tab3_data.eStaCount>0}}">
+          <view class="x-block-header">
+            <view class="x-block-header-title">
+              <text id="tab3_mainLineTitle">其他线路</text>
+              <view style="height: 15rpx; width: 144rpx; background-color: gray;"></view>
+            </view>
+            <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+          </view>
+          <view class="x-block-block">
+            <view wx:for="{{tab3_data.eSta}}">
+              <t-cell wx:if="{{item.status==0}}" title="{{item.name}}" hover note="{{item.line.name}}" style="--td-cell-note-color:{{item.line.hex}};" />
+              <t-cell wx:else="" title="{{item.name}}" hover note="{{item.line.name}}">
+                <t-badge count="本站停运" slot="note" />
+              </t-cell>
+            </view>
+          </view>
+        </view>
+      </view>
+      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+
+    </scroll-view>
   </view>
 
   <t-toast id="toast-loading" />
