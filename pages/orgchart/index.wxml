@@ -70,9 +70,40 @@
       <view style="content: ''; overflow: hidden;">
         <!-- https://developers.weixin.qq.com/community/develop/doc/00080cc5040580a4e629d18f45ec00 -->
       </view>
-      <view>456 Placeholder</view>
+      <view style="min-height:{{tabBlockHeight-minHeightAboveFooter*rpx2px}}px;">
+        <view class="x-title">关于</view>
+        <view class="x-desc">关于本页面及站区一览表</view>
+
+        <view class="x-block">
+          <view class="x-block-header">
+            <view class="x-block-header-title">数据信息</view>
+            <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+          </view>
+          <view class="x-block-block"></view>
+          <t-cell title="数据来源" hover note="{{tab2_author}}" />
+          <t-cell title="授权协议" hover note="CC BY-SA 4.0" />
+          <t-cell title="数据版本" hover note="{{tab2_ver}}" />
+          <t-cell title="上传时间" hover note="{{tab2_time}}" />
+        </view>
+
+        <view class="x-block">
+          <view class="x-block-header">
+            <view class="x-block-header-title">说明</view>
+            <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+          </view>
+          <view class="x-block-block">
+            <t-collapse>
+              <t-collapse-panel header="项目页面说明">
+                <view class="x-text">
+                  <text class="x-text-for" wx:for="{{tab2_infoList}}">{{index+1+". "+item}}</text>
+                </view>
+              </t-collapse-panel>
+            </t-collapse>
+          </view>
+        </view>
+      </view>
+      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
     </scroll-view>
-    <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
   </view>
 
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==3}}" style="height: {{tabBlockHeight}}px;">
@@ -80,7 +111,7 @@
       <view style="content: ''; overflow: hidden;">
         <!-- https://developers.weixin.qq.com/community/develop/doc/00080cc5040580a4e629d18f45ec00 -->
       </view>
-      <view style="min-height:{{tabBlockHeight-160*rpx2px}}px;">
+      <view style="min-height:{{tabBlockHeight-minHeightAboveFooter*rpx2px}}px;">
         <view class="x-title">{{tab3_data.name}}</view>
         <view class="x-desc">{{tab3_data.t2.name}}</view>
 

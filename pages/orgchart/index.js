@@ -15,12 +15,13 @@ var lineToTier2 = {};
 
 Page({
   data: {
-    rpx2px:app.globalData.rpx2px,
+    rpx2px: app.globalData.rpx2px,
 
     tabBlockHeight: 200,
     rowHeight: 200,
     titleWidth: 200,
     tabBlockTop: 200,
+    minHeightAboveFooter: 150,
 
     tier2List: [],
     tier2Dic: {},
@@ -28,7 +29,7 @@ Page({
     lineDic: {},
 
     tabCurr: 0,
-    tabList: ["线路", "机构", "说明"],
+    tabList: ["线路", "机构", "关于"],
     dialogConfirmBtn: {
       content: "返回",
       variant: "base"
@@ -40,6 +41,11 @@ Page({
     tab0_offsetList: [],
     tab0_titleOffset: 0,
     tab0_scrollTop: 0,
+
+    tab2_author: "",
+    tab2_date: "",
+    tab2_ver: "",
+    tab2_infoList: [],
 
     tab3_t3Path: ["y3", "m2", "西直门站区"],
     tab3_data: {},
@@ -189,7 +195,9 @@ Page({
     let tier2List = Object.keys(raw);
     let tier2Dic = {};
 
-    console.log(raw);
+    let date = new Date(rawData.timeStamp * 1000);
+    let d = `${date.getFullYear().toString()}年${(date.getMonth()+1).toString()}月${date.getDate().toString()}日 ${date.getHours().toString()}:${date.getMinutes().toString()}:${date.getSeconds().toString()}`;
+    console.log(rawData)
 
     tier2List.forEach((value, index, array) => {
       tier2Dic[value] = {
@@ -200,7 +208,7 @@ Page({
         type: raw[value].type,
         loc: raw[value].loc,
         lineList: [],
-        lineDic: {}
+        lineDic: {},
       };
       Object.keys(raw[value].lines).forEach((v, i, a) => {
         raw[value].lines[v].hidden ? NaN : tier2Dic[value].lineList.push(v);
@@ -227,7 +235,12 @@ Page({
       lineList,
       lineDic,
       tier2List,
-      tier2Dic
+      tier2Dic,
+
+      tab2_author: rawData.author,
+      tab2_time: d,
+      tab2_ver: rawData.ver,
+      tab2_infoList: rawData.infoList,
     }, () => {
       this.setLayoutVars();
       hideToast({
