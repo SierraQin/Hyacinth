@@ -127,7 +127,7 @@
             <view wx:for="{{tab3_data.iSta}}">
               <t-cell wx:if="{{item.status==0}}" title="{{item.name}}" hover />
               <t-cell wx:else="" title="{{item.name}}" hover>
-                <t-badge count="本站停运" slot="note" />
+                <t-badge size="large" count="本站停运" slot="note" />
               </t-cell>
             </view>
           </view>
