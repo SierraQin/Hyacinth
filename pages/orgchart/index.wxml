@@ -1,7 +1,7 @@
 <!-- pages/orgchart/index.wxml -->
 
 <view class="main_fixed">
-  <t-navbar title="站区一览表" left-arrow bind:go-back="navBackHandler"></t-navbar>
+  <t-navbar title="站区一览表" delta="0" left-arrow bind:go-back="navBackHandler"></t-navbar>
 
   <t-tabs defaultValue="{{tabCurr}}" bind:change="onTabsChange">
     <t-tab-panel wx:for="{{tabList}}" label="{{item}}" value="{{index}}" />
