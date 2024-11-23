@@ -12,7 +12,7 @@
       <t-side-bar-item wx:for="{{lineList}}" value="{{index}}" label="{{lineDic[item].name}}" style="background-color: {{lineDic[item].hex}}; color: {{lineDic[item].dark?'black':'white'}};" />
     </t-side-bar>
 
-    <scroll-view class="sidebar-content" scroll-y scroll-with-animation scroll-top="{{tab0_scrollTop}}" style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px" bind:scroll="onTab0Scroll">
+    <scroll-view class="sidebar-content" id="tab0_scroll" scroll-y scroll-with-animation scroll-top="{{tab0_scrollTop}}" style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px" bind:scroll="onTab0Scroll">
       <view id="tab0-title">
         <view class="x-title">站区一览表</view>
         <view class="x-desc">按线路查询各车站所属的站区</view>

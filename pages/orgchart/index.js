@@ -9,6 +9,7 @@ const app = getApp();
 var rawData = NaN;
 
 var prevScrollTop = 0;
+var prevScrollTopForNavBack = 0;
 var scrollSourseFlag = false;
 
 var lineToTier2 = {};
@@ -197,7 +198,6 @@ Page({
 
     let date = new Date(rawData.timeStamp * 1000);
     let d = `${date.getFullYear().toString()}年${(date.getMonth()+1).toString()}月${date.getDate().toString()}日 ${date.getHours().toString()}:${date.getMinutes().toString()}:${date.getSeconds().toString()}`;
-    console.log(rawData)
 
     tier2List.forEach((value, index, array) => {
       tier2Dic[value] = {
@@ -324,6 +324,14 @@ Page({
       });
     });
 
+    if (this.data.tabCurr == 0) {
+      wx.createSelectorQuery().select("#tab0_scroll").fields({
+        scrollOffset: true
+      }, (res) => {
+        prevScrollTopForNavBack = res.scrollTop;
+      }).exec();
+    }
+
     that.setData({
         tab3_navBack: this.data.tabCurr,
         tab3_t3Path,
@@ -343,11 +351,19 @@ Page({
   },
 
   onTabsChange(evt) {
+    if (this.data.tabCurr == 0) {
+      wx.createSelectorQuery().select("#tab0_scroll").fields({
+        scrollOffset: true
+      }, (res) => {
+        prevScrollTopForNavBack = res.scrollTop;
+      }).exec();
+    }
+
     this.setData({
       tabCurr: evt.detail.value
     }, () => {
       this.setData({
-        tab0_scrollTop: prevScrollTop
+        tab0_scrollTop: prevScrollTopForNavBack
       });
     });
   },
@@ -397,10 +413,11 @@ Page({
   navBackHandler() {
     if (this.data.tabCurr == 3) {
       this.setData({
-        tabCurr: this.data.tab3_navBack
+        tabCurr: this.data.tab3_navBack,
+        tab0_scrollTop: prevScrollTopForNavBack
       }, () => {
         this.setData({
-          tab0_scrollTop: prevScrollTop
+          tab0_scrollTop: prevScrollTopForNavBack
         });
       });
     } else {
