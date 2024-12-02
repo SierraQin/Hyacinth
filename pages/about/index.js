@@ -111,7 +111,7 @@ Page({
     let v = "";
     if (app.globalData.env === "prod") {
       v = app.globalData.ver;
-    } else if (app.globalData.env === "prod") {
+    } else if (app.globalData.env === "test") {
       v = "版本号待定"
     } else {
       v = "开发版"
