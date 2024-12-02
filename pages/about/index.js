@@ -92,6 +92,9 @@ Page({
       }
     ],
 
+    footer: app.globalData.guiText.footer,
+    loadingFailDialogTitle: app.globalData.guiText.loadingFailDialogTitle,
+    loadingFailDialogContent: app.globalData.guiText.loadingFailDialogContent,
   },
 
   onLoad() {

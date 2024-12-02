@@ -90,6 +90,9 @@
   </view>
 
 
-  <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+  <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
+
+  <t-toast id="toast-loading" />
+  <t-dialog visible="{{showDialog}}" title="{{loadingFailDialogTitle}}" content="{{loadingFailDialogContent}}" confirm-btn="{{dialogConfirmBtn}}" bind:confirm="navBackHandler" />
 
 </view>

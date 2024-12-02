@@ -28,6 +28,6 @@
     </scroll-view>
   </t-dialog>
 
-  <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1"></t-footer>
+  <t-footer text="{{footer}}"></t-footer>
 
 </view>

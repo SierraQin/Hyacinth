@@ -56,7 +56,9 @@ Page({
     },
     dialog853Btn: {
       content: "好的"
-    }
+    },
+
+    footer: app.globalData.guiText.footer,
   },
 
   onLoad() {

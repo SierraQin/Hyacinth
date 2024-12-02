@@ -61,7 +61,7 @@
         </t-collapse>
       </view>
 
-      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+      <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
     </scroll-view>
   </view>
 
@@ -102,7 +102,7 @@
           </view>
         </view>
       </view>
-      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+      <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
     </scroll-view>
   </view>
 
@@ -151,13 +151,13 @@
           </view>
         </view>
       </view>
-      <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+      <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
 
     </scroll-view>
   </view>
 
   <t-toast id="toast-loading" />
-  <t-dialog visible="{{showDialog}}" title="数据同步错误" content="未能从服务器上成功下载数据。可能是你的手机网络不稳定，当然也有可能单纯是服务器出问题了。" confirm-btn="{{dialogConfirmBtn}}" bind:confirm="navBackHandler" />
+  <t-dialog visible="{{showDialog}}" title="{{loadingFailDialogTitle}}" content="{{loadingFailDialogContent}}" confirm-btn="{{dialogConfirmBtn}}" bind:confirm="navBackHandler" />
 
 </view>
-<!-- <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer> -->
+<!-- <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer> -->

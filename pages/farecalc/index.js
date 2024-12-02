@@ -1,15 +1,17 @@
 // pages/farecalc/index.js
 
-import {
-  localData
-} from "./localData.js";
+import Toast, {
+  hideToast
+} from 'tdesign-miniprogram/toast/index';
 
-var fareVars = localData.fareVars;
+const app = getApp();
 
-var staDict = fareVars.staDict;
-var staToId = fareVars.staToId;
-var staKeys = Object.keys(staDict);
-var staCount = staKeys.length;
+var rawData = NaN;
+
+var staDict = NaN;
+var staToId = NaN;
+var staKeys = NaN;
+var staCount = NaN;
 
 var casLineSta = [];
 
@@ -23,13 +25,13 @@ function name2nid(s) {
 };
 
 function nid2name(n) {
-  return fareVars.staDict[n.toString()].name;
+  return rawData.staDict[n.toString()].name;
 };
 
 Page({
   data: {
-    freeDis: fareVars.freeDis,
-    vit_enabled: fareVars.mainRegion.vitEnabled,
+    freeDis: 0,
+    vit_enabled: false,
     calcRules: [""],
 
 
@@ -47,36 +49,91 @@ Page({
     route_dis: 0,
     route_fare: 0,
 
+    footer: app.globalData.guiText.footer,
+    loadingFailDialogTitle: app.globalData.guiText.loadingFailDialogTitle,
+    loadingFailDialogContent: app.globalData.guiText.loadingFailDialogContent,
   },
 
   onLoad() {
+    const that = this;
 
-    // 这里纠结一下要不要从后端拉取配置文件
-    let calcRules = [];
-    fareVars.rules.forEach((rulz) => {
-      calcRules.push(rulz.replace("%FREE_DIS%", +this.data.freeDis.toString()));
+    Toast({
+      context: this,
+      selector: '#toast-loading',
+      duration: -1,
+      message: '同步数据中...',
+      theme: 'loading',
+      direction: 'column',
+      preventScrollThrough: true,
     });
 
-    this.dumpStaToCascader();
+
+    wx.request({
+      url: "https://static.qinxr.cn/Hyacinth/farecalc.json",
+      timeout: 15000,
+      dataType: "json",
+      success: (res) => {
+        rawData = res.data;
+        staDict = rawData.staDict;
+        staToId = rawData.staToId;
+        staKeys = Object.keys(staDict);
+        staCount = staKeys.length;
+
+        let date = new Date(rawData.timeStamp * 1000);
+        let d = `${date.getFullYear().toString()}年${(date.getMonth()+1).toString()}月${date.getDate().toString()}日 ${date.getHours().toString()}:${date.getMinutes().toString()}:${date.getSeconds().toString()}`;
+
+        that.setData({
+          ver: rawData.ver,
+          updateTime: d,
+          freeDis: rawData.freeDis,
+          vit_enabled: rawData.mainRegion.vitEnabled,
+        }, () => {
+          hideToast({
+            context: this,
+            selector: '#toast-loading',
+          });
+        });
+
+        let calcRules = [];
+        rawData.rules.forEach((rulz) => {
+          calcRules.push(rulz.replace("%FREE_DIS%", +that.data.freeDis.toString()));
+        });
+
+        that.dumpStaToCascader();
 
 
-    this.setCurrSta(0, this.data.cas_curr[0]);
-    this.setCurrSta(1, this.data.cas_curr[1]);
-    this.setData({
-      calcRules,
-      cas_note: [
-        this.getCasNote(this.data.cas_curr[0]),
-        this.getCasNote(this.data.cas_curr[1])
-      ]
+        that.setCurrSta(0, that.data.cas_curr[0]);
+        that.setCurrSta(1, that.data.cas_curr[1]);
+        that.setData({
+          calcRules,
+          cas_note: [
+            that.getCasNote(that.data.cas_curr[0]),
+            that.getCasNote(that.data.cas_curr[1])
+          ]
+        });
+
+        that.showRes();
+
+      },
+      fail: (res) => {
+        hideToast({
+          context: this,
+          selector: '#toast-loading',
+        });
+        that.setData({
+          showDialog: true,
+        });
+      }
     });
 
-    this.showRes();
+
+
 
   },
 
   setCurrSta(i, casid) {
     let nid = parseInt(casid) % 10000;
-    if (!Object.keys(fareVars.staDict).includes(nid.toString())) {
+    if (!Object.keys(rawData.staDict).includes(nid.toString())) {
       this.setData({
         route_valid: false
       });
@@ -94,13 +151,13 @@ Page({
     let lineId = parseInt(casId / 10000).toString();
     let staNid = (casId % 10000).toString();
 
-    return fareVars.lineDetail[lineId].name + " - " + nid2name(staNid);
+    return rawData.lineDetail[lineId].name + " - " + nid2name(staNid);
   },
 
   dumpStaToCascader() {
     casLineSta = [];
-    fareVars.mainRegion.lines.forEach((value, index, array) => {
-      let lineItem = fareVars.lineDetail[value.toString()];
+    rawData.mainRegion.lines.forEach((value, index, array) => {
+      let lineItem = rawData.lineDetail[value.toString()];
       let baseValue = value * 10000;
       let l = {
         value: baseValue.toString(),
@@ -264,7 +321,7 @@ Page({
 
     for (let i = 1; i < res.path_line.length; i++) {
       if (res.path_line[i] == line_prev) {
-        fareVars.staDict[res.path_sta[i - 1].toString()].edges[res.path_sta[i].toString()].forEach((e) => {
+        rawData.staDict[res.path_sta[i - 1].toString()].edges[res.path_sta[i].toString()].forEach((e) => {
           if (e.line == line_prev) {
             d += e.dis;
           }
@@ -275,7 +332,7 @@ Page({
           hex,
           dark,
           t1
-        } = fareVars.lineDetail[line_prev.toString()];
+        } = rawData.lineDetail[line_prev.toString()];
         route_list.push({
           sta: nid2name(res.path_sta[i - 1]),
           line: name,
@@ -287,7 +344,7 @@ Page({
         sta_prev = res.path_sta[i - 1];
         line_prev = res.path_line[i];
 
-        fareVars.staDict[res.path_sta[i - 1].toString()].edges[res.path_sta[i].toString()].forEach((e) => {
+        rawData.staDict[res.path_sta[i - 1].toString()].edges[res.path_sta[i].toString()].forEach((e) => {
           if (e.line == line_prev) {
             d = e.dis;
           }
@@ -300,7 +357,7 @@ Page({
           hex,
           dark,
           t1
-        } = fareVars.lineDetail[line_prev.toString()];
+        } = rawData.lineDetail[line_prev.toString()];
         route_list.push({
           sta: nid2name(res.path_sta[i]),
           line: name,

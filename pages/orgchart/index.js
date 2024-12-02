@@ -53,6 +53,9 @@ Page({
     tab3_navBack: 0,
     tab3_mainBarWidth: 50,
 
+    footer: app.globalData.guiText.footer,
+    loadingFailDialogTitle: app.globalData.guiText.loadingFailDialogTitle,
+    loadingFailDialogContent: app.globalData.guiText.loadingFailDialogContent,
   },
 
   onLoad() {
@@ -85,7 +88,7 @@ Page({
           showDialog: true,
         });
       }
-    })
+    });
 
 
 

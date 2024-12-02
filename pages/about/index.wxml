@@ -64,6 +64,6 @@
     </view>
   </view>
 
-  <t-footer text="Made by SierraQin with ♥. License: LGPL-2.1" style="margin-top: 60rpx;"></t-footer>
+  <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
 
 </view>
