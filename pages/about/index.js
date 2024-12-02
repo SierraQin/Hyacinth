@@ -6,6 +6,8 @@ import {
 
 const app = getApp();
 
+var unlockDebugCount = 0;
+
 var debugInfo = {
   environment: {
     platform: app.globalData.systemInfo.platform,
@@ -38,6 +40,14 @@ var debugInfo = {
 
 Page({
   data: {
+    version: "",
+
+    debugModeEnabled: app.globalData.debugMode,
+
+    debugDialog: {
+      show: false
+    },
+
     libCurr: {
       name: "SierraQin/列车运行前方",
       repoUrl: "https://github.com/SierraQin/Hyacinth",
@@ -98,6 +108,18 @@ Page({
   },
 
   onLoad() {
+    let v = "";
+    if (app.globalData.env === "prod") {
+      v = app.globalData.ver;
+    } else if (app.globalData.env === "prod") {
+      v = "版本号待定"
+    } else {
+      v = "开发版"
+    }
+    this.setData({
+      version: v
+    });
+
     this.setDebugInfoText();
   },
 
@@ -110,6 +132,61 @@ Page({
     });
     this.setData({
       debugInfoText: JSON.stringify(r)
+    });
+  },
+
+  verCellHandler(evt) {
+    if (app.globalData.debugMode) {
+      return;
+    } else if (unlockDebugCount < 9) {
+      unlockDebugCount += 1;
+    } else {
+      unlockDebugCount = 0;
+      this.setData({
+        debugDialog: {
+          show: true,
+          title: "启用调试模式",
+          content: "点击确定按钮后，小程序将立即关闭。下次进入列车运行前方小程序时将启动调试模式。",
+          confirmBtn: {
+            content: "确定",
+            variant: "base"
+          }
+        }
+      });
+    }
+  },
+
+  debugCellHandler() {
+    this.setData({
+      debugDialog: {
+        show: true,
+        title: "禁用调试模式",
+        content: "点击确定按钮后，小程序将立即关闭。下次进入列车运行前方小程序时将禁用调试模式。",
+        confirmBtn: {
+          content: "确定",
+          variant: "base"
+        }
+      }
+    });
+  },
+
+  switchDebugMode() {
+    if (app.globalData.debugMode) {
+      wx.setEnableDebug({
+        enableDebug: false,
+      });
+    } else {
+      wx.setEnableDebug({
+        enableDebug: true,
+      });
+    }
+  },
+
+  debugDialogCancelBtnHandler() {
+    let d = this.data.debugDialog;
+    d.show = false;
+    this.setData({
+      debugDialog: d,
     });
   },
 

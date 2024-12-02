@@ -2,6 +2,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "t-back-top": "tdesign-miniprogram/back-top/back-top",
+    "t-cell": "tdesign-miniprogram/cell/cell",
     "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
     "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
@@ -10,6 +11,7 @@
     "t-footer": "tdesign-miniprogram/footer/footer",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-textarea": "tdesign-miniprogram/textarea/textarea"
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-toast": "tdesign-miniprogram/toast/toast"
   }
 }

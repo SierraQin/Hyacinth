@@ -35,6 +35,7 @@ App({
       develop: "dev"
     };
     that.globalData.env = mpEnvEnum[mpInfo.envVersion];
-    that.globalData.ver = mpInfo.envVersion == "release" ? mpInfo.version : "预览版";
+    that.globalData.ver = mpInfo.envVersion == "release" ? mpInfo.version : NaN;
+    that.globalData.debugMode = wx.getAppBaseInfo().enableDebug;
   }
 });

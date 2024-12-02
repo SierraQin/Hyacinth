@@ -10,6 +10,16 @@
 
   <view class="x-block">
     <view class="x-block-header">
+      <view class="x-block-header-title">版本信息</view>
+      <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+    </view>
+    <view class="x-block-block"></view>
+    <t-cell title="版本号" hover note="{{version}}" bind:tap="verCellHandler" />
+    <t-cell wx:if="{{debugModeEnabled}}" title="调试模式已启动" hover arrow bind:tap="debugCellHandler" />
+  </view>
+
+  <view class="x-block">
+    <view class="x-block-header">
       <view class="x-block-header-title">Debug信息</view>
       <view class="x-block-header-desc">您可以在反馈问题时，选择将下面的一些信息在问卷中提供给作者，以便更快对问题进行排查和修复。</view>
     </view>
@@ -66,4 +76,5 @@
 
   <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
 
+  <t-dialog visible="{{debugDialog.show}}" title="{{debugDialog.title}}" content="{{debugDialog.content}}" confirm-btn="{{debugDialog.confirmBtn}}" cancel-btn="取消" bind:confirm="switchDebugMode" bind:cancel="debugDialogCancelBtnHandler" />
 </view>
