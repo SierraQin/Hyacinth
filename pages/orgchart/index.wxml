@@ -1,7 +1,7 @@
 <!-- pages/orgchart/index.wxml -->
 
 <view class="main_fixed">
-  <t-navbar title="站区一览表" delta="0" left-arrow bind:go-back="navBackHandler"></t-navbar>
+  <t-navbar title="站区查询" delta="0" left-arrow bind:go-back="navBackHandler"></t-navbar>
 
   <t-tabs defaultValue="{{tabCurr}}" bind:change="onTabsChange">
     <t-tab-panel wx:for="{{tabList}}" label="{{item}}" value="{{index}}" />
@@ -14,7 +14,7 @@
 
     <scroll-view class="sidebar-content" id="tab0_scroll" scroll-y scroll-with-animation scroll-top="{{tab0_scrollTop}}" style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px" bind:scroll="onTab0Scroll">
       <view id="tab0-title">
-        <view class="x-title">站区一览表</view>
+        <view class="x-title">站区查询</view>
         <view class="x-desc">按线路查询各车站所属的站区</view>
         <view class="x-desc"> </view>
       </view>
@@ -39,7 +39,7 @@
 
   <view id="tabPanel" class="tab-block" wx:if="{{tabCurr==1}}" style="height: {{tabBlockHeight}}px;">
     <scroll-view scroll-y scroll-with-animation style="height:{{tabBlockHeight}}px;top:{{tabBlockTop}}px">
-      <view class="x-title">站区一览表</view>
+      <view class="x-title">站区查询</view>
       <view class="x-desc">按机构查询各站区下辖车站</view>
 
       <view class="x-block" wx:for="{{tier2List}}" wx:for-item="t2">
@@ -72,7 +72,7 @@
       </view>
       <view style="min-height:{{tabBlockHeight-minHeightAboveFooter*rpx2px}}px;">
         <view class="x-title">关于</view>
-        <view class="x-desc">关于本页面及站区一览表</view>
+        <view class="x-desc">关于本页面及站区查询</view>
 
         <view class="x-block">
           <view class="x-block-header">

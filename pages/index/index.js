@@ -13,7 +13,7 @@ Page({
     //cardList: [true, true, true, true, true, true, true, true, true],
     cardList: [true, true, true, true, true, true, false, false, false],
     cardBgList: localData.cardBgB64,
-    cardTitleList: ["路网配线图", "路网配线图(旧)", "计价路由", "站区一览表", "问题反馈", "关于...", "占位", "占位", "占位"],
+    cardTitleList: ["路网配线图", "路网配线图(旧)", "计价路由", "站区查询", "问题反馈", "关于...", "占位", "占位", "占位"],
     cardTextList: [
       "基于Skyline渲染引擎彻底进行重构，显著降低掉帧卡顿",
       "旧版小程序，专为PC端及较老版本微信保留",
