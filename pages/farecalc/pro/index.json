@@ -1,0 +1,14 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-cascader": "tdesign-miniprogram/cascader/cascader",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-collapse": "tdesign-miniprogram/collapse/collapse",
+    "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-footer": "tdesign-miniprogram/footer/footer",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-toast": "tdesign-miniprogram/toast/toast"
+  }
+}

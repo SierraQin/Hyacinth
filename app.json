@@ -11,7 +11,8 @@
     "pages/orgchart/index",
     "pages/proj853/index",
     "pages/proj853/legacy/index",
-    "pages/farecalc/index"
+    "pages/farecalc/index",
+    "pages/farecalc/pro/index"
   ],
   "renderer": "webview",
   "rendererOptions": {

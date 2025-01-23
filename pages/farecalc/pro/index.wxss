@@ -1,0 +1,8 @@
+/* pages/farecalc/pro/index.wxss */
+
+.main {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+

@@ -1,0 +1,47 @@
+<!--pages/farecalc/pro/index.wxml-->
+
+<view class="main">
+  <view class="block">
+    <t-navbar title="计价路由" left-arrow bind:go-back="navBackHandler"></t-navbar>
+  </view>
+
+  <view class="x-title">计价路由计算器 Pro</view>
+  <view class="x-desc">计价路由计算器，但专业版</view>
+
+
+
+
+
+  <view class="x-block">
+    <view class="x-block-header">
+      <view class="x-block-header-title">路径</view>
+      <!-- <view class="x-block-header-desc"><text>{{""}}</text></view> -->
+    </view>
+
+    <view class="x-block-block">
+      <t-cell id="cell_0" title="起点站" note="{{cas_note[0]}}" bind:click="showCascader" arrow />
+      <t-cascader id="cas_0" visible="{{cas_visible[0]}}" options="{{cas_options}}" value="{{cas_curr[0]}}" title="选择起点站" sub-titles="{{cas_subTitles}}" bind:change="onCascaderChange"></t-cascader>
+      <t-cell id="cell_1" title="终点站" note="{{cas_note[1]}}" bind:click="showCascader" arrow />
+      <t-cascader id="cas_1" visible="{{cas_visible[1]}}" options="{{cas_options}}" value="{{cas_curr[1]}}" title="选择终点站" sub-titles="{{cas_subTitles}}" bind:change="onCascaderChange"></t-cascader>
+    </view>
+
+    <view class="x-block-block">
+    </view>
+  </view>
+
+
+
+
+
+
+
+
+
+
+  <t-footer text="{{footer}}" style="margin-top: 60rpx;"></t-footer>
+
+  <t-toast id="toast-loading" />
+
+
+
+</view>
